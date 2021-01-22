@@ -45,6 +45,7 @@ git log --all --decorate --oneline --graph  # this time there will be only one b
 ```
 #### Task8: push the branch to remote
 ```
+git push origin --all
 ```
 #### Task9: create a pull request to merge
 ```
