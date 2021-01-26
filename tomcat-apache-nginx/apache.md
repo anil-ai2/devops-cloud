@@ -7,7 +7,7 @@ apt update -y   # update the repositories
 apt install apache2 -y 
 
 ```
-#### Task3: stop/start/restart apache server
+#### Task2: stop/start/restart apache server
 ```
 sudo systemctl status apache2   # check status of apache server
 sudo systemctl enable apache2   # enable auto start when system starts
@@ -16,7 +16,7 @@ sudo systemctl stop apache2     # stop apache server
 sudo systemctl restart apache2  # restart apache server
 ```
 
-#### Task2: access the default page
+#### Task3: access the default page
 * apache runs on port `80`
 ```
 curl  http://<ip-of-the-server> #default page of apache 
