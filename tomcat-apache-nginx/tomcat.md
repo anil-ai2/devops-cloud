@@ -82,16 +82,23 @@ sudo cp /root/context.xml /opt/tomcat/webapps/host-manager/META-INF/context.xml
 sudo cp /root/context.xml  /opt/tomcat/webapps/manager/META-INF/context.xml
 ```
 #### Task5: check the default page of tomcat from command prompt
+* tomcat default port is 8080
 ```
 curl http://<ip-of-server>:8080     # will show default page
 
 curl -I http://<ip-of-server>:8080     # will show return code 200 OK
 ```
 #### Task6: check default page of tomcat from browser
-* click on __TomcatGUI__ tab on the browser    (make sure tomcat server is up and running)
+
+* __instructions applicable if working on katacoda Ubuntu server__
+* click on __Dashboard for UI__ tab on the katacoda browser
+* on the newly opened webpage , give __8080__ as __Display Port__
+* you will be able to see the default page of tomcat server
+* change the url to required one to access different pages on tomcat
+
 #### Task7: check the configuration file and change the port
 ```
-cd /opt/tomcat  #tomcat home directory
+cd /opt/tomcat/conf     #tomcat configuration directory
 
 sudo nano  server.xml   #tomcat configuration file 
 #check for line `<Connector port="8080" protocol="HTTP/1.1" ` and change 8080 to 7070
