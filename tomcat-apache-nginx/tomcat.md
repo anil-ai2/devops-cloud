@@ -3,17 +3,25 @@
 #### Task1: Install tomcat 
 ```
 sudo apt update 
+
 sudo apt install default-jdk -y     #install java . This is pre-requisite for tomcat
+
 java --version      # check java version
+
 sudo update-java-alternatives -l    # this will give java path
+
 wget http://www-eu.apache.org/dist/tomcat/tomcat-9/v9.0.27/bin/apache-tomcat-9.0.27.tar.gz -P /tmp  #download tomcat installation file
-sudo tar zxvf /tmp/apache-tomcat-9*.tar.gz -C /opt/tomcat   # extract the code under /opt/tomcat
+
+sudo tar zxvf /tmp/apache-tomcat-9*.tar.gz -C /opt/
+
+tomcat   # extract the code under /opt/tomcat
 ```
 
 
 #### Task2: setup tomcat as a service
 ```
 cd /etc/systemd/system
+
 sudo touch tomcat.service
 ========================================================
 sudo nano tomcat.servicee
@@ -42,7 +50,9 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ========================================================
+
 sudo systemctl daemon-reload        #reload the processe
+
 sudo systemctl enable tomcat        #enable tomcat server to start the system start
 
 ```
@@ -50,19 +60,25 @@ sudo systemctl enable tomcat        #enable tomcat server to start the system st
 #### Task2: start/stop/restart tomcat
 ```
 sudo systemctl status tomcat    # check status
+
 sudo systemctl start tomcat ;  sudo systemctl status tomcat     # start and check start
+
 sudo systemctl stop tomcat; sudo systemctl status tomcat        # stop and check status
+
 sudo systemctl restart tomcat  ; sudo systemctl status tomcat   # restart and check status
 ```
 ### Task3: Allow access to tomcat webgui from outside
 ```
 #tomcat web gui accessible only from localhost. Allow external access
+
 sudo cp /root/context.xml /opt/tomcat/webapps/host-manager/META-INF/context.xml
+
 sudo cp /root/context.xml  /opt/tomcat/webapps/manager/META-INF/context.xml
 ```
 #### Task3: check the default page of tomcat from command prompt
 ```
 curl http://<ip-of-server>:8080     # will show default page
+
 curl -I http://<ip-of-server>:8080     # will show return code 200 OK
 ```
 #### Task4: check default page of tomcat from browser
@@ -70,43 +86,61 @@ curl -I http://<ip-of-server>:8080     # will show return code 200 OK
 #### Task4: check the configuration file and change the port
 ```
 cd /opt/tomcat  #tomcat home directory
+
 sudo nano  server.xml   #tomcat configuration file 
 #check for line `<Connector port="8080" protocol="HTTP/1.1" ` and change 8080 to 7070
 #save and close by ctrl+o , Enter , ctrl+x
+
 sudo grep 7070 server.xml   # grep for line containing 7070 in server.xml 
+
 sudo systemctl restart tomcat     # restart tomcat server
+
 sudo systemctl status tomcat      # check tomcat server status make sure its running
+
 curl http://<ip-of-server>:7070   # try to access on port 7070
 ```
 #### Task5: check the log files of tomcat
 ```
 cd /opt/tomcat      #tomcat root diretory
+
 cd logs             #tomcat logs directory 
+
 ls -ltr             # list all files in logs directory with latest file at bottom
+
 cat catalina.log    # this is main tomcat file
 ```
 #### Task6: deploy application to tomcat 
 * any java archive (jar/war/ear) deployed to /opt/tomcat/webapps directory will be automatically deployed to tomcat server
 * open __TWO__ terminals to the same server. terminal1 for monitoring logs and terminal2 to DEPLOY the app
+
 ```
 # on terminal 1
 cd /opt/tomcat/logs     # go to tomcat logs directory
 tail -f catalina.log    # tail the log file for fresh deployment. press ctrl+c to exit out of log
+
+
 # on terminal 2
 sudo cp /root/helloworld.jar /opt/tomcat/webapps    #copy 
+
 # now go back to terminal1 and see the log. Newly deployed helloworld.jar will be deployed
 ```
 * access the webpage http://<ip-of-server>:7070/helloworld
+
 #### Task7: undeploy application from tomcat
 * remove the jar archive (jar/war/ear) to undeploy the application. Only the jar/war/ear, not the directory
 * open __TWO__ terminals to the same server. terminal1 for monitoring logs and terminal2 to UNDEPLOY the app
 ```
 # on terminal 1
+
 cd /opt/tomcat/logs     # go to tomcat logs directory
+
 tail -f catalina.log    # tail the log file for fresh deployment. press ctrl+c to exit out of log
+
 # on terminal 2
 cd /opt/tomcat/webapps
+
 rm -rf helloworld.jar   # do not touch helloworld directory. After the jar is removed , the directory will automatically gets removed
+
 # now go back to terminal1 and see the log. You will see that the helloword application is getting undeployed
 
 ```
