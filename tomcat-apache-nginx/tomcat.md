@@ -57,7 +57,7 @@ sudo systemctl enable tomcat        #enable tomcat server to start the system st
 
 ```
 
-#### Task2: start/stop/restart tomcat
+#### Task3: start/stop/restart tomcat
 ```
 sudo systemctl status tomcat    # check status
 
@@ -67,7 +67,7 @@ sudo systemctl stop tomcat; sudo systemctl status tomcat        # stop and check
 
 sudo systemctl restart tomcat  ; sudo systemctl status tomcat   # restart and check status
 ```
-### Task3: Allow access to tomcat webgui from outside
+### Task4: Allow access to tomcat webgui from outside
 ```
 #tomcat web gui accessible only from localhost. Allow external access
 
@@ -75,15 +75,15 @@ sudo cp /root/context.xml /opt/tomcat/webapps/host-manager/META-INF/context.xml
 
 sudo cp /root/context.xml  /opt/tomcat/webapps/manager/META-INF/context.xml
 ```
-#### Task3: check the default page of tomcat from command prompt
+#### Task5: check the default page of tomcat from command prompt
 ```
 curl http://<ip-of-server>:8080     # will show default page
 
 curl -I http://<ip-of-server>:8080     # will show return code 200 OK
 ```
-#### Task4: check default page of tomcat from browser
+#### Task6: check default page of tomcat from browser
 * click on __TomcatGUI__ tab on the browser    (make sure tomcat server is up and running)
-#### Task4: check the configuration file and change the port
+#### Task7: check the configuration file and change the port
 ```
 cd /opt/tomcat  #tomcat home directory
 
@@ -99,7 +99,7 @@ sudo systemctl status tomcat      # check tomcat server status make sure its run
 
 curl http://<ip-of-server>:7070   # try to access on port 7070
 ```
-#### Task5: check the log files of tomcat
+#### Task8: check the log files of tomcat
 ```
 cd /opt/tomcat      #tomcat root diretory
 
@@ -109,7 +109,7 @@ ls -ltr             # list all files in logs directory with latest file at botto
 
 cat catalina.log    # this is main tomcat file
 ```
-#### Task6: deploy application to tomcat 
+#### Task9: deploy application to tomcat 
 * any java archive (jar/war/ear) deployed to /opt/tomcat/webapps directory will be automatically deployed to tomcat server
 * open __TWO__ terminals to the same server. terminal1 for monitoring logs and terminal2 to DEPLOY the app
 
@@ -126,7 +126,7 @@ sudo cp /root/helloworld.jar /opt/tomcat/webapps    #copy
 ```
 * access the webpage http://<ip-of-server>:7070/helloworld
 
-#### Task7: undeploy application from tomcat
+#### Task10: undeploy application from tomcat
 * remove the jar archive (jar/war/ear) to undeploy the application. Only the jar/war/ear, not the directory
 * open __TWO__ terminals to the same server. terminal1 for monitoring logs and terminal2 to UNDEPLOY the app
 ```
@@ -145,9 +145,10 @@ rm -rf helloworld.jar   # do not touch helloworld directory. After the jar is re
 
 ```
 * access the webpage http://<ip-of-server>:7070/helloworld  # it will not be accessible
-```
----
----
+
+----
+----
+
 ### :rocket: scenario based tasks 
 #### scenario1: 
 #### scenario2: 
