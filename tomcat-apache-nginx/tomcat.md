@@ -2,19 +2,21 @@
 ---
 #### Task1: Install tomcat 
 ```
-sudo apt update 
+sudo apt update -y
 
 sudo apt install default-jdk -y     #install java . This is pre-requisite for tomcat
 
 java --version      # check java version
 
-sudo update-java-alternatives -l    # this will give java path
+sudo update-java-alternatives -l    # this will give java path. Currently /usr/lib/jvm/java-1.11.0-openjdk-amd64
 
-wget http://www-eu.apache.org/dist/tomcat/tomcat-9/v9.0.27/bin/apache-tomcat-9.0.27.tar.gz -P /tmp  #download tomcat installation file
+wget https://mirrors.estointernet.in/apache/tomcat/tomcat-9/v9.0.41/bin/apache-tomcat-9.0.41.tar.gz -P /tmp  #download tomcat installation file
 
-sudo tar zxvf /tmp/apache-tomcat-9*.tar.gz -C /opt/
+mkdir -p /opt/tomcat
+sudo tar zxvf /tmp/apache-tomcat-9*.tar.gz -C /opt/   # extract the code under /opt/
+mv /opt/apache-tomcat-9* /opt/tomcat                  # rename the extracted apache-tomcat-9-x-x directory to tomcat
 
-tomcat   # extract the code under /opt/tomcat
+
 ```
 
 
@@ -23,14 +25,15 @@ tomcat   # extract the code under /opt/tomcat
 cd /etc/systemd/system
 
 sudo touch tomcat.service
-========================================================
-sudo nano tomcat.servicee
+
+sudo nano tomcat.service    # copy the code between the lines into tomcat.service file
+===============================================
 [Unit]
 Description=Apache Tomcat Web Application Container
 After=network.target
 
 [Service]
-Type=forking
+Type=oneshot
 
 Environment=JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64        #make sure this is correct
 Environment=CATALINA_PID=/opt/tomcat/temp/tomcat.pid
@@ -45,12 +48,14 @@ User=root
 Group=root
 UMask=0007
 RestartSec=10
-Restart=always
+RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
 ========================================================
+# after updating the tomcat.service file with above content save and close with ctrl+o , Enter, ctrl+x 
 
+# make sure the java path is updated properly
 sudo systemctl daemon-reload        #reload the processe
 
 sudo systemctl enable tomcat        #enable tomcat server to start the system start
@@ -61,7 +66,8 @@ sudo systemctl enable tomcat        #enable tomcat server to start the system st
 ```
 sudo systemctl status tomcat    # check status
 
-sudo systemctl start tomcat ;  sudo systemctl status tomcat     # start and check start
+sudo systemctl start tomcat      # start tomcat server    
+sudo systemctl status tomcat     # check status tomcat server
 
 sudo systemctl stop tomcat; sudo systemctl status tomcat        # stop and check status
 
