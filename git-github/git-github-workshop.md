@@ -17,6 +17,8 @@ apt install git -y #on ubuntu server
 * click "Repositories" -> click the required repo -> click on "Code" (green button) -> click "HTTPS" -> copy the url of repo
 * login to linux vm , go to the localtion where you want the repo to be created , and execute the below command
 ```
+git config –-global user.name “[name]”
+git config –-global user.email “[email address]”
 git clone <repo-url that was copied in previous step>   # 
 ```
 #### Task6: checkout a branch 
@@ -43,6 +45,7 @@ git log --all --decorate --oneline --graph  # this time there will be only one b
 ```
 #### Task8: push the branch to remote
 ```
+git push origin --all
 ```
 #### Task9: create a pull request to merge
 ```
