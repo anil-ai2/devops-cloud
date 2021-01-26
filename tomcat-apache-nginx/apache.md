@@ -17,7 +17,7 @@ sudo systemctl restart apache2  # restart apache server
 ```
 
 #### Task2: access the default page
-* apache runs on port 80
+* apache runs on port `80`
 ```
 curl  http://<ip-of-the-server> #default page of apache 
 curl -I http://<ip-of-the-server> #200 OK successful access code
@@ -36,7 +36,7 @@ curl  http://<ip-of-the-server>:8080     #server accessible on 8080
 curl -I http://<ip-of-the-server>:8080   #200 OK successful access code
 ```
 #### Task5: deploy html file to apache server
-* any html/css file copied to /var/www/html directory is automatically server by apache server.
+* any html/css file copied to `/var/www/html` directory is automatically server by apache server.
 ```
 cd /var/www/html    # application directory for apache httpd server
 echo "<h1>Hello from server $(hostname -f) </h1>" >> new-file.html     # new content added to index.html file 
@@ -45,7 +45,7 @@ curl  http://<ip-of-the-server>:8080/new-file.html     #server accessible on 808
 curl -I http://<ip-of-the-server>:8080/new-file.html   #200 OK successful access code
 ```
 #### Task6: undeploy html file from apache server
-* if the html file is removed from /var/www/html directory then its undeployed. Restart of apche2 is required
+* if the html file is removed from `/var/www/html` directory then its undeployed. Restart of apche2 is required
 ```
 cd /var/www/html
 rm new-file.html
@@ -54,7 +54,7 @@ curl  http://<ip-of-the-server>:8080/new-file.html     #page NOT accessible anym
 curl -I http://<ip-of-the-server>:8080/new-file.html   #404, Page not found error
 ```
 #### Task7: check logs for errors
-* apache and nginx has similar log files. access.log and error.log
+* apache and nginx has similar log files. `access.log` and `error.log`
 ```
 cd /var/log/apache2
 cat access.log      # check the access.log
