@@ -12,7 +12,6 @@ sudo update-java-alternatives -l    # this will give java path. Currently /usr/l
 
 wget https://mirrors.estointernet.in/apache/tomcat/tomcat-9/v9.0.41/bin/apache-tomcat-9.0.41.tar.gz -P /tmp  #download tomcat installation file
 
-mkdir -p /opt/tomcat
 sudo tar zxvf /tmp/apache-tomcat-9*.tar.gz -C /opt/   # extract the code under /opt/
 mv /opt/apache-tomcat-9* /opt/tomcat                  # rename the extracted apache-tomcat-9-x-x directory to tomcat
 
@@ -120,7 +119,7 @@ cd logs             #tomcat logs directory
 
 ls -ltr             # list all files in logs directory with latest file at bottom
 
-cat catalina.log    # this is main tomcat file
+cat catalina.out    # this is main tomcat file
 ```
 #### Task9: deploy application to tomcat 
 * any java archive (jar/war/ear) deployed to /opt/tomcat/webapps directory will be automatically deployed to tomcat server
