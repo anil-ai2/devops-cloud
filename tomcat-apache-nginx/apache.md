@@ -79,6 +79,10 @@ cat access.log      # check the access.log
 cat error.log       # check error log to troubleshoot errors
 ```
 ---
+
+Task 8: Installing nginx
+sudo apt-get install nginx
+
 ---
 ### :rocket: scenario based tasks 
 #### scenario1: 
