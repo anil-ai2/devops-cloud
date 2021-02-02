@@ -132,14 +132,16 @@ tail -f catalina.log    # tail the log file for fresh deployment. press ctrl+c t
 
 
 # on terminal 2
-sudo cp /root/helloworld.jar /opt/tomcat/webapps    #copy 
+git clone https://github.com/ncodeit-io/devops-cloud-public-repo.git  #clone the repo that has war file
+cd devops-cloud-public-repo
+sudo cp ncodeit.war /opt/tomcat/webapps    #copy ncodeit.war file to webapps directory 
 
 # now go back to terminal1 and see the log. Newly deployed helloworld.jar will be deployed
 ```
-* access the webpage http://<ip-of-server>:7070/helloworld
+* access the webpage http://<ip-of-server>:7070/ncodeit/ncodeit.html
 
 #### Task10: undeploy application from tomcat
-* remove the jar archive (jar/war/ear) to undeploy the application. Only the jar/war/ear, not the directory
+* remove the jar archive (war file) to undeploy the application. Only the war, not the directory
 * open __TWO__ terminals to the same server. terminal1 for monitoring logs and terminal2 to UNDEPLOY the app
 ```
 # on terminal 1
@@ -151,12 +153,12 @@ tail -f catalina.log    # tail the log file for fresh deployment. press ctrl+c t
 # on terminal 2
 cd /opt/tomcat/webapps
 
-rm -rf helloworld.jar   # do not touch helloworld directory. After the jar is removed , the directory will automatically gets removed
+rm -rf ncodeit.war   # do not touch ncodeit directory. After the war is removed , the directory will automatically gets removed
 
 # now go back to terminal1 and see the log. You will see that the helloword application is getting undeployed
 
 ```
-* access the webpage http://<ip-of-server>:7070/helloworld  # it will not be accessible
+* access the webpage http://<ip-of-server>:7070/ncodeit/ncodeit.html  # it will not be accessible
 
 ----
 ----
