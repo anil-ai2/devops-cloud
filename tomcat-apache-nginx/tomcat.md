@@ -122,7 +122,7 @@ ls -ltr             # list all files in logs directory with latest file at botto
 cat catalina.out    # this is main tomcat file
 ```
 #### Task9: deploy application to tomcat 
-* any java archive (jar/war/ear) deployed to /opt/tomcat/webapps directory will be automatically deployed to tomcat server
+* any java archive (war/ear) deployed to /opt/tomcat/webapps directory will be automatically deployed to tomcat server
 * open __TWO__ terminals to the same server. terminal1 for monitoring logs and terminal2 to DEPLOY the app
 
 ```
@@ -132,16 +132,14 @@ tail -f catalina.log    # tail the log file for fresh deployment. press ctrl+c t
 
 
 # on terminal 2
-git clone https://github.com/ncodeit-io/devops-cloud-public-repo.git  #clone the repo that has war file
-cd devops-cloud-public-repo
-sudo cp ncodeit.war /opt/tomcat/webapps    #copy ncodeit.war file to webapps directory 
+sudo cp /root/SampleWebApp.war /opt/tomcat/webapps    #copy 
 
 # now go back to terminal1 and see the log. Newly deployed helloworld.jar will be deployed
 ```
-* access the webpage http://<ip-of-server>:7070/ncodeit/ncodeit.html
+* access the webpage http://<ip-of-server>:7070/helloworld
 
 #### Task10: undeploy application from tomcat
-* remove the jar archive (war file) to undeploy the application. Only the war, not the directory
+* remove the jar archive (war/ear) to undeploy the application. Only the jar/war/ear, not the directory
 * open __TWO__ terminals to the same server. terminal1 for monitoring logs and terminal2 to UNDEPLOY the app
 ```
 # on terminal 1
@@ -153,12 +151,12 @@ tail -f catalina.log    # tail the log file for fresh deployment. press ctrl+c t
 # on terminal 2
 cd /opt/tomcat/webapps
 
-rm -rf ncodeit.war   # do not touch ncodeit directory. After the war is removed , the directory will automatically gets removed
+rm -rf SampleWebApp.war   # do not touch SampleWebApp directory. After the jar is removed , the directory will automatically gets removed
 
-# now go back to terminal1 and see the log. You will see that the helloword application is getting undeployed
+# now go back to terminal1 and see the log. You will see that the SampleWebApp application is getting undeployed
 
 ```
-* access the webpage http://<ip-of-server>:7070/ncodeit/ncodeit.html  # it will not be accessible
+* access the webpage http://<ip-of-server>:7070/SampleWebApp  # it will not be accessible
 
 ----
 ----
