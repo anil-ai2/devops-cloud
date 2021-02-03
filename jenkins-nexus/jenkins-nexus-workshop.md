@@ -17,15 +17,19 @@
 * DO NOT enable `anonymous access`
 
 #### Task3: Jenkins plugins Installation
-* Install the following plugins in jenkins (Jenkins Dashboard -> Manage Jenkins -> Manage Plugins)
+* Install the following plugins in jenkins (Jenkins Dashboard -> Manage Jenkins -> Manage Plugins -> Available )
+* search for following plugins and select all
     + slack Notification Plugin
     + nexus artifact uploader
     + nexus platform 
     + git parameter plugin
     + pipeline utility steps plugin 
+    + Artifactory
+    + Maven Release Plug-in
+    + Pipeline Maven Integration Plugin
     + disk-usage plugin 
     + Dashboard View 
-
+    + click `Install without restart`
 #### Task4: Install & configure Maven
 * `maven` is a tool to build java artifacts. It should be present on the Jenkins server to compile java code during jenkins jobs
 ```
@@ -37,7 +41,7 @@ $JAVA_HOME/bin/java --version   # check java version
 * go to Jenkins Dashboard -> Manage Jenkins -> Global Tool configuration  -> Add Maven
 * give `Name` as `Maven` 
 * Unselect `Install automatically`  -> give `MAVEN_HOME` as `/usr/share/maven`
-* click `Apply` 
+* click `Apply` , wait till its `saved`
 
 #### Task5: Nexus Repository Configuration on Jenkins
 * After installing `nexus artifact uploader` & `nexus platform` plugins , it needs to be configured
@@ -47,9 +51,10 @@ $JAVA_HOME/bin/java --version   # check java version
     + `Display name` -> `nexus3-server`
     + `Server ID`    -> `NEXUS01`
     + `Server URL`   -> `http://<ip-of-your-vm>:8081`
-    + `Credentials`  -> click `Add` -> `Jenkins` -> provide `username/password` of nexus server that was created just now
-    + `Test Connection` 
-    + `Apply`
+    + `Credentials`  -> click `Add` -> `Jenkins` -> provide `username/password` of nexus server that was created just now -> click `Add`
+    +  now for `Credentials` , select the id thats created just now
+    + `Test Connection` , make sure `connection succeeded` is displayed
+    + `Apply` wait for `saved`
 
 #### Task6: slack configuration for notifications
 * after installing `slack notifications` plugin, configure the settings of this plugin so that jenkins can send notifications to slack
@@ -59,6 +64,9 @@ $JAVA_HOME/bin/java --version   # check java version
     + `Credentials`  -> click `Add` -> `Jenkins` -> under `Kind` select  `Secret text`
         + for `Secret` give as `mVpee4Ly9JRAKwzRj4JSEYiG` 
         + for `ID`  give `slack-id-for-jenkins-alerts`
+        + click `Add`
+    + now for `Credentials` select the id `slack-id-for-jenkins-alerts` , its created just now
+    + `Default channel/member id`  give `devops-cloud`
     + `Test Connection`     -> Make sure its `Success`
     + `Apply`
 
@@ -66,34 +74,43 @@ $JAVA_HOME/bin/java --version   # check java version
 * Lets create the first Jenkins Job , its a simple `Free style` job
 * go to Jenkins Dashboard 
     + New Item -> give `01-freestyle-job`
+    + click `Freestyle project`
+    + click `OK`
     + under `Source Code Management` select `Git`
     + for `Repository URL` give `https://github.com/betawins/spring3-mvc-maven-xml-hello-world-1.git`
     + for `Branch to Build` give `*/master`
-    + under `Build` -> `Invoke Artifactory Maven 3` 
-        + for `Maven versio` give `Maven`
-        + for `Goals and Options` give `clean package` 
-    + under `Nexus Artifact Uploader` 
-        + `Nexus Version` give `NEXUS3`
-        + `Protocol` give `HTTP`
-        + `Nexus Url` give `<ip-of-your-server>:8081`
-        + `Credentials`  , select the credentials created earlier for nexus user
-        + `GroupId` give `com.ncodeit`
-        + `Version` give `${BUILD_NUMBER}`
-        + `Repository` give `maven-public`
-        + `ArtifactId` give `ncodeit-hello-world`
-        + `Type` give `war`
-        + `File` give `target/ncodeit-hello-world-$BUILD_NUMBER.war `      
+    + under `Build` 
+        + click `Add build step` -> select `Invoke Artifactory Maven 3` 
+            + for `Maven versio` give `Maven`
+            + for `Goals and Options` give `clean package` 
+        + click `Add build step` -> select `Nexus Artifact Uploader` 
+            + `Nexus Version` give `NEXUS3`
+            + `Protocol` give `HTTP`
+            + `Nexus Url` give `<ip-of-your-server>:8081`
+            + `Credentials`  , select the credentials created earlier for nexus user
+            + `GroupId` give `com.ncodeit`
+            + `Version` give `${BUILD_NUMBER}`
+            + `Repository` give `maven-releases`
+            + `Artifacts` , click `Add` 
+                + `ArtifactId` give `ncodeit-hello-world`
+                + `Type` give `war`
+                + `File` give `target/ncodeit-hello-world-$BUILD_NUMBER.war`      
     + under `Post-build Actions`
-        + select `Slack Notifications`
-            + select all options
-    + `Apply`
+        + click `Add post-build action`
+            + select `Slack Notifications`
+                + select all options
+    + `Apply` , wait for `saved` 
+    + `save` 
+
 
 #### Task8: Run the free style job and check if the Artifact reached nexus repo
 * go to Jenkins Dashboard -> click the newly created job `01-freestyle-job`
     + `Build now` 
     + under `Build History` -> click on latest running build 
     + clikc `Console Output` 
+    + Jenkins will download all the dependencies to run the job
     + wait till `Finished: SUCCESS`
+* go to slack and make sure you got the jenkins notification
 * login to nexus repository
     + click `Browse`
     + click `maven-public`
