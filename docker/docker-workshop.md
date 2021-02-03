@@ -34,19 +34,30 @@ docker  image ls -a         # list all the images on local server
 #### Task4: delete images
 ```
 docker  image ls -a         # to list images
-docker  rmi  <image-id>
+docker  rmi  httpd          # remove httpd image from local server
 ```
 #### Task5: launch containers with port and volumes
 * containers can be launched with available images or images that are not currently available on local system. Incase , the image is not available locally docker will try to pull it from repository
 ```
-docker  run -d -p 8888:80 -v /root/my-httpd-files:/var/www/html --name ncd-apache1 httpd      # launch apache httpd container
-docker  run -d -p 7777:8080 -v /root/my-tomcat-webapps:/usr/local/tomcat/webapps --name ncd-tomcat1 tomcat      # launch tomcat container
+# launch apache httpd container with 80 port from container mapped to 8888 port on host
+# also , the htdocs directory where deployment files should be copied is mapped to /root/my-httpd-files directory on host
+docker  run -d -p 8888:80 -v /root/my-httpd-files:/usr/local/apache2/htdocs --name ncd-apache1 httpd
+
+netstat -nap|grep 8888      # check for port 8888 on host. Remember https is running on 80 inside container
+
+# launch tomcat container with 8080 port from container mapped to 7777 port onn host
+# webapps directory of tomcat is mapped to /root/my-tomcat-webapps on host
+docker  run -d -p 7777:8080 -v /root/my-tomcat-webapps:/usr/local/tomcat/webapps --name ncd-tomcat1 tomcat      
+
 netstat -nap|grep 7777      # check for port 7777 on host. Remember its running on 8080 inside container
 
 
 docker logs ncd-tomcat1  --follow       # check the logs of container ncd-tomcat1 . Follow the logs. Press ctrl+c to exit
 
 docker inspect ncd-tomcat1      # inspect the meta data of containers. eg: ports , volumes etc
+```
+* deploy a sample application to both apps by copying the file to host mapped directory
+```
 ```
 * once launched , apache and tomcat servers can be accessed on host's exposed ports
 
