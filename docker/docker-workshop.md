@@ -58,12 +58,15 @@ docker inspect ncd-tomcat1      # inspect the meta data of containers. eg: ports
 ```
 * deploy a sample application to both apps by copying the file to host mapped directory
 ```
+cp /tmp/apache.html   /root/my-httpd-files          # copy apache.html for apache server
+cp /tmp/ncodeit.war   /root/my-tomcat-webapps       # copy ncodeit.war file for tomcat server
+
 ```
 * once launched , apache and tomcat servers can be accessed on host's exposed ports
 
 ```
-curl -I <ip-of-vm>:8888     # httpd server is accessible on 8888 port of host server
-curl -I <ip-of-vm>:7777     # tomcat server is accessible on 7777 port of host server
+curl -I <ip-of-vm>:8888/apache.html     # httpd server is accessible on 8888 port of host server
+curl -I <ip-of-vm>:7777/ncodeit/ncodeit.html     # tomcat server is accessible on 7777 port of host server
 ```
 * you can use any port available on host to map to any port inside the container
 
