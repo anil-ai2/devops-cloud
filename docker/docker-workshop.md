@@ -26,17 +26,17 @@ docker pull tomcat          # pull tomcat image
     + go to `https://hub.docker.com/r/jenkins/jenkins/tags?page=1&ordering=last_updated` and pull the image with tag `2.263.3-lts-slim`
     `docker pull jenkins/jenkins:2.263.3-lts-slim`
 
-#### Task4: list all images available on the local server
+#### Task3: list all images available on the local server
 ```
 docker  image ls -a         # list all the images on local server
 
 ```
-#### Task5: delete images
+#### Task4: delete images
 ```
 docker  image ls -a         # to list images
 docker  rmi  <image-id>
 ```
-#### Task6: launch containers with port and volumes
+#### Task5: launch containers with port and volumes
 * containers can be launched with available images or images that are not currently available on local system. Incase , the image is not available locally docker will try to pull it from repository
 ```
 docker  run -d -p 8888:80 -v /root/my-httpd-files:/var/www/html --name ncd-apache1 httpd      # launch apache httpd container
@@ -56,14 +56,14 @@ curl -I <ip-of-vm>:7777     # tomcat server is accessible on 7777 port of host s
 ```
 * you can use any port available on host to map to any port inside the container
 
-#### Task7: login to containers & execute commands inside containers
+#### Task6: login to containers & execute commands inside containers
 ```
 docker exec -it ncd-tomcat1 /bin/bash       # start a bash shell inside a container
 docker exec -it ncd-tomcat1 hostname        # run hostname command inside a container
 docker exec -it ncd-tomcat1 top             # run top command inside a contaienr. press q to exit
 ```
 
-#### Task8: stop/start/restart/kill  containers
+#### Task7: stop/start/restart/kill  containers
 ```
 docker stop ncd-tomcat1         # stop a running container
 docker ps -a                    # check status of all containers
@@ -75,7 +75,7 @@ docker ps -a                    # check status of all containers
 docker kill ncd-tomcat1         # kill the container if its not responding to stop command
 docker ps -a                    # check status of all containers
 ```
-#### Task9: commit & save existing containers
+#### Task8: commit & save existing containers
 * sometimes we want to save an existing container as image. To take the image to another system
 * _this is not recommended practice. images should not be created from containers. Instead use `Dockerfile` to create images
 ```
@@ -102,12 +102,12 @@ docker ps -a            # check status of all containers
 docker rm <container-id or container-name>
 docker rm $(docker ps -a -f status=exited -f status=created -q)     # remove all containers in exited or created state
 ```
-#### Task3: creat dockerhub account 
+#### Task10: creat dockerhub account 
 * go to www.docker.com and create a free account for yourself
 * login to the account -> click "Create Repository" -> create a new repository
 * you will push some images into this repository of your account in the next steps
 
-#### Task10: tag images & push images to dockerhub
+#### Task11: tag images & push images to dockerhub
 * tagging in simple words is to give a version to an existing image
 * syntax `docker tag <existing-image-with-tag>  <dockerhub-user>/<remote-image-name-with-tag>
 * __repository name on dockerhub.com should be same as the image name thats being tagged
@@ -135,14 +135,14 @@ docker logout       #logout of dockerhub account
 
 rm  /root/.docker/config.json       # remove the stored credentials 
 ```
-#### Task10: Link multiple containers with one another
+#### Task12: Link multiple containers with one another
 * for eg: if a database is required for application, a database container is launched first and then other container is launched. 
 * Both these containers are linked together 
 
-#### Task10: docker-compose and yaml file
+#### Task13: docker-compose and yaml file
 
-#### Task10: launch a local docker repository to store images locally
-#### Task10: tag and push images to local repository
+#### Task14: launch a local docker repository to store images locally
+#### Task15: tag and push images to local repository
 
 ---
 ---
