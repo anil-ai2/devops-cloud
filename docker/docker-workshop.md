@@ -80,33 +80,67 @@ docker ps -a                    # check status of all containers
 * _this is not recommended practice. images should not be created from containers. Instead use `Dockerfile` to create images
 ```
 docker pull ubuntu              # pull ubuntu image. Yes, ubuntu also can be run inside a container
-docker run -d --name ncd-ubuntu ubuntu  # launch a container using the image
-docker exec -it ncd-ubuntu /bin/bash    # login to ubuntu image
-    apt-get install nmap htop                    # inside the container , install nmap and htop commands
+docker run -it ubuntu /bin/bash    # login to ubuntu image
+    apt-get update -y && apt-get install htop -y     # inside the container. install htop
+    htop                           # run htop command inside the container . press q to exit out of htop
     exit
-docker ps -a                    # check all the containers on the host
+docker ps -a                            # check all the containers on the host
 
-docker commit  ncd-ubuntu   ncd-ubuntu-image    #ncd-ubuntu container is stored as ncd-ubuntu-image image
-docker images ls -a             # check the images. newly created image should be available now
+docker commit  <container-id-of-ubuntu>   ncd-ubuntu-image    #this container will be in Exited state
+docker images ls -a                     # check the images. newly created image should be available now
 
-docker run -d --name ncd-ubuntu-new  ncd-ubuntu-image   # launch a new container using the new image
-docker exec -it ncd-ubuntu-new /bin/bash                # login to new container
+docker run -it ncd-ubuntu-image /bin/bash    # launch a new container from image 
     htop                                                # this command is availble without any installation
-
-
+    exit
 ```
+* same thing can be done for any container
 #### Task9: delete containers
 ```
 * remove all containers that have "exited" or "created" - created is a state of the container when a wrong command is executed inside
 
-docker rm $(docker ps -a -f status=exited -f status=created -q)
 docker ps -a            # check status of all containers
+docker rm <container-id or container-name>
+docker rm $(docker ps -a -f status=exited -f status=created -q)     # remove all containers in exited or created state
 ```
-#### Task10: tag images 
-#### Task10: push images to dockerhub
-#### Task10: Link multiple containers with one another
-#### Task10: docker-compose and yaml file
 #### Task3: creat dockerhub account 
+* go to www.docker.com and create a free account for yourself
+* login to the account -> click "Create Repository" -> create a new repository
+* you will push some images into this repository of your account in the next steps
+
+#### Task10: tag images & push images to dockerhub
+* tagging in simple words is to give a version to an existing image
+* syntax `docker tag <existing-image-with-tag>  <dockerhub-user>/<remote-image-name-with-tag>
+* __repository name on dockerhub.com should be same as the image name thats being tagged
+* once the tagging is done, login to docker registry with `docker login`
+* then push the image to docker registry using `docker push`
+* lets tag our image and push to the newly created dockerhub account 
+```
+docker pull tomcat:8.5                        # pull tomcat 8.5 image from dockerhub official apache repo
+
+docker image list -a                          # list all the images available locally
+
+docker tag tomcat:8.5   ncodeitdocker/tomcat:8.5.ncd    # tag can be anything. ncodeitdocker is the username on dockerhub.com
+
+docker image list -a                          # you will see your image also
+# now login to dockerhub.com and create a repository with name "tomcat" . Other repo names will not work
+# name of the image and name of repo should be same
+
+docker login         # provide your dockerhub username/password 
+
+docker push ncodeitdocker/tomcat:8.5.ncd      # pushes image to repo in your account
+
+# login to dockerhub and make sure the new image is avaialble there
+
+docker logout       #logout of dockerhub account
+
+rm  /root/.docker/config.json       # remove the stored credentials 
+```
+#### Task10: Link multiple containers with one another
+* for eg: if a database is required for application, a database container is launched first and then other container is launched. 
+* Both these containers are linked together 
+
+#### Task10: docker-compose and yaml file
+
 #### Task10: launch a local docker repository to store images locally
 #### Task10: tag and push images to local repository
 
