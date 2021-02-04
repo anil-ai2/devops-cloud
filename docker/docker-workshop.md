@@ -61,6 +61,7 @@ docker inspect ncd-tomcat1      # inspect the meta data of containers. eg: ports
 cp /tmp/apache.html   /root/my-httpd-files          # copy apache.html for apache server
 cp /tmp/ncodeit.war   /root/my-tomcat-webapps       # copy ncodeit.war file for tomcat server
 
+docker logs ncd-tomcat1  --follow                   # check if ncodeit.war file is deployed
 ```
 * once launched , apache and tomcat servers can be accessed on host's exposed ports
 
@@ -89,6 +90,7 @@ docker ps -a                    # check status of all containers
 docker kill ncd-tomcat1         # kill the container if its not responding to stop command
 docker ps -a                    # check status of all containers
 ```
+
 #### Task8: commit & save existing containers
 * sometimes we want to save an existing container as image. To take the image to another system
 * _this is not recommended practice. images should not be created from containers. Instead use `Dockerfile` to create images
@@ -101,13 +103,14 @@ docker run -it ubuntu /bin/bash    # login to ubuntu image
 docker ps -a                            # check all the containers on the host
 
 docker commit  <container-id-of-ubuntu>   ncd-ubuntu-image    #this container will be in Exited state
-docker images ls -a                     # check the images. newly created image should be available now
+docker image ls -a                     # check the images. newly created image should be available now
 
 docker run -it ncd-ubuntu-image /bin/bash    # launch a new container from image 
     htop                                                # this command is availble without any installation
     exit
 ```
 * same thing can be done for any container
+
 #### Task9: delete containers
 ```
 * remove all containers that have "exited" or "created" - created is a state of the container when a wrong command is executed inside
@@ -116,6 +119,7 @@ docker ps -a            # check status of all containers
 docker rm <container-id or container-name>
 docker rm $(docker ps -a -f status=exited -f status=created -q)     # remove all containers in exited or created state
 ```
+
 #### Task10: creat dockerhub account 
 * go to www.docker.com and create a free account for yourself
 * login to the account -> click "Create Repository" -> create a new repository
@@ -129,13 +133,13 @@ docker rm $(docker ps -a -f status=exited -f status=created -q)     # remove all
 * then push the image to docker registry using `docker push`
 * lets tag our image and push to the newly created dockerhub account 
 ```
-docker pull tomcat:8.5                        # pull tomcat 8.5 image from dockerhub official apache repo
+docker pull tomcat:8.5                    # pull tomcat 8.5 image from dockerhub official apache repo
 
-docker image list -a                          # list all the images available locally
+docker image list -a                      # list all the images available locally
 
 docker tag tomcat:8.5   ncodeitdocker/tomcat:8.5.ncd    # tag can be anything. ncodeitdocker is the username on dockerhub.com
 
-docker image list -a                          # you will see your image also
+docker image ls -a                          # you will see the newly created image also
 # now login to dockerhub.com and create a repository with name "tomcat" . Other repo names will not work
 # name of the image and name of repo should be same
 
@@ -149,9 +153,31 @@ docker logout       #logout of dockerhub account
 
 rm  /root/.docker/config.json       # remove the stored credentials 
 ```
+
 #### Task12: Link multiple containers with one another
+
 * for eg: if a database is required for application, a database container is launched first and then other container is launched. 
-* Both these containers are linked together 
+![wordpress and mysql architecture](https://www.blaize.net/wp-content/uploads/2017/02/wordpress-docker.png)
+* Lets deploy mysql/mariadb first and link this container to frontend wordpress container 
+
+```
+mkdir /root/wordpress && cd /root/wordpress     #create two directories to map to containers
+
+# launch the backend mysql(mariadb) container, setup parameters using -e
+# and mount /root/wordpress/database directory from host to /var/lib/mysql on the container
+docker run -e MYSQL_ROOT_PASSWORD=ncodeit123 -e MYSQL_DATABASE=wordpress --name wordpressdb -v "/root/wordpress/database":/var/lib/mysql -d mariadb:latest
+
+docker ps -a    # check the list of containers
+
+# launch the frontend wordpress container . Link it to backend mysql using "--link" keyword
+# so frontend container is linked to backend container 
+
+docker run -e WORDPRESS_DB_PASSWORD=ncodeit123 --name wordpress --link wordpressdb:mysql -p 80:80 -v "$PWD/html":/var/www/html -d wordpress
+
+docker ps -a 
+```
+
+* now check that the wordpress is accessible. Launch `Display UI` , access port 80
 
 #### Task13: docker-compose and yaml file
 
