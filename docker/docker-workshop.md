@@ -172,14 +172,44 @@ docker ps -a    # check the list of containers
 # launch the frontend wordpress container . Link it to backend mysql using "--link" keyword
 # so frontend container is linked to backend container 
 
-docker run -e WORDPRESS_DB_PASSWORD=ncodeit123 --name wordpress --link wordpressdb:mysql -p 80:80 -v "$PWD/html":/var/www/html -d wordpress
+docker run -e WORDPRESS_DB_PASSWORD=ncodeit123 --name wordpress --link wordpressdb:mysql -p 80:80 -v "/root/wordpress/html":/var/www/html -d wordpress
 
 docker ps -a 
 ```
 
 * now check that the wordpress is accessible. Launch `Display UI` , access port 80
 
-#### Task13: docker-compose and yaml file
+#### Task13: Install docker-compose and launch linked containers using yaml files
+* make sure docker-ce is already installed. If not, install it first
+* first install docker-compose 
+```
+# install docker-compose 
+
+curl -L https://github.com/docker/compose/releases/download/1.28.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+
+docker-compose --version        # check version of docker-compose
+```
+* create a separate directory `wordpress-compose` and setup `docker-compose.yml` file
+* file name should be `docker-compose.yml` only
+
+```
+mkdir /root/wordpress-compose && cd /root/wordpress-compose
+
+cp /tmp/docker-compose.yml /root/wordpress-compose      #copy docker-compose.yml 
+
+docker-compose build -d                                 #build the services for first time 
+
+docker-compose ps           # list all containers running under this docker-compose
+docker-compose top          # list all processes running inside the containers
+```
+* access the wordpress site on port 80 and make sure its accessible
+* now lets perform some operations on these containers
+```
+docker-compose logs                 # show the logs of all containers
+docker-compose stop         # stop all containers
+docker-compose kill         # kill if stop is not working
+docker-compose start        # start all containers
+```
 
 #### Task14: launch a local docker repository to store images locally
 #### Task15: tag and push images to local repository
