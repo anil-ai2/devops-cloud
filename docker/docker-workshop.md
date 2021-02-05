@@ -147,7 +147,7 @@ docker image ls -a                          # you will see the newly created ima
 
 docker login         # provide your dockerhub username/password 
 
-docker push ncodeitdocker/tomcat:8.5.ncd      # pushes image to repo in your account
+docker push <dockerhub-username>/tomcat:8.5.ncd      # pushes image to repo in your account
 
 # login to dockerhub and make sure the new image is avaialble there
 
@@ -247,21 +247,65 @@ curl -X GET http://<ip-of-your-vm>:5000/v2/_catalog     # list the images in the
 * pull some images from dockerhub , tag them with new version, push them to private registry
 ```
 docker pull busybox     # busybox is a popular image with lot of linux tools
+docker pull httpd:2.4   # pull apache httpd server 
+docker pull jenkins/jenkins:lts     # pull jenkins image 
+docker pull alpine/git              # git software installed on alpine os 
+
 docker image ls -a          # list all images on the host
+
+# now tag all images with "ncdv1" 
 
 docker image tag busybox:latest localhost:5000/busybox:ncdv1    #tag busybox:latest to push to local 
+docker image tag httpd:2.4 localhost:5000/httpd:ncdv1
+docker image tag jenkins/jenkins:lts localhost:5000/jenkins:ncdv1
+docker image tag alpine/git:latest localhost:5000/git:ncdv1
+
 docker image ls -a          # list all images on the host
 
+# push all the newly tagged images to private registry and then remove those tagged images from host
 docker push localhost:5000/busybox:ncdv1     #image pushed to private registry
+docker push localhost:5000/httpd:ncdv1
+docker push localhost:5000/jenkins:ncdv1
+docker push localhost:5000/git:ncdv1
 
+# now you have all the images on the private registy
+# Lets cleanup these images from host
 
 docker rmi busybox:latest   # remove busybox:latest from current host
-docker rmi busybox:ncdv1   # remove busybox:ncdv1 from current host
-#we have crated this image to push to private registry. Now we will delete from host and then pull from private registy 
+docker rmi localhost:5000/busybox:ncdv1   # remove busybox:ncdv1 from current host
 
-docker image ls -a          # list all images on the host
+docker rmi httpd:2.4
+docker rmi localhost:5000/httpd:ncdv1
+
+docker rmi jenkins/jenkins:lts
+docker rmi localhost:5000/jenkins:ncdv1
+
+docker rmi alpine/git:latest
+docker rmi localhost:5000/git:ncdv1
+
+# Lets check if the images are in our private registry or not. We have only removed them from host
 curl -X GET http://<ip-of-your-vm>:5000/v2/_catalog
-*
+
+
+
+#we have created this image to push to private registry. Now we will delete from host and then pull from private registy 
+
+docker image ls -a          # list all images on the host. You should not see the removed images.
+
+curl -X GET http://<ip-of-your-vm>:5000/v2/_catalog
+
+# now lets pull the same image from private registry instead of dockerhub
+
+docker pull localhost:5000/busybox:ncdv1
+docker pull localhost:5000/httpd:ncdv1
+docker pull localhost:5000/jenkins:ncdv1
+docker pull localhost:5000/git:ncdv1
+
+# now all the images are pulled to current host from private registry
+# list list all the images
+
+docker image ls -a          # list all images on host. YOu should see the newly pulled image from private registry 
+
 ```
 
 ---
