@@ -139,7 +139,7 @@ docker pull tomcat:8.5                    # pull tomcat 8.5 image from dockerhub
 
 docker image list -a                      # list all the images available locally
 
-docker tag tomcat:8.5   ncodeitdocker/tomcat:8.5.ncd    # tag can be anything. ncodeitdocker is the username on dockerhub.com
+docker tag tomcat:8.5   <dockerhub-username>/tomcat:8.5.ncd    # tag can be anything. ncodeitdocker is the username on dockerhub.com
 
 docker image ls -a                          # you will see the newly created image also
 # now login to dockerhub.com and create a repository with name "tomcat" . Other repo names will not work
@@ -292,7 +292,12 @@ curl -X GET http://<ip-of-your-vm>:5000/v2/_catalog
 
 docker image ls -a          # list all images on the host. You should not see the removed images.
 
+# list repositories in the private registry 
 curl -X GET http://<ip-of-your-vm>:5000/v2/_catalog
+
+# with in each repository , there will be images with different tags. Lets list out tags for httpd image
+# curl -X GET http://<ip-of-your-vm>:5000/v2/<name>/tags/list
+curl -X GET http://<ip-of-your-vm>:5000/v2/httpd/tags/list  # list all tags for httpd image
 
 # now lets pull the same image from private registry instead of dockerhub
 
