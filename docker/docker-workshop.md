@@ -261,7 +261,7 @@ docker rmi busybox:ncdv1   # remove busybox:ncdv1 from current host
 
 docker image ls -a          # list all images on the host
 curl -X GET http://<ip-of-your-vm>:5000/v2/_catalog
-
+*
 ```
 
 ---
