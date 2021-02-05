@@ -1,5 +1,7 @@
 ### :camel: command based tasks
 ---
+* __*this workshop needs ncodeit custom ubuntu server*__
+
 #### Task1: Install docker-ce on ubuntu18.04 
 ```
 systemctl status docker
@@ -195,9 +197,11 @@ docker-compose --version        # check version of docker-compose
 ```
 mkdir /root/wordpress-compose && cd /root/wordpress-compose
 
-cp /tmp/docker-compose.yml /root/wordpress-compose      #copy docker-compose.yml 
+cp /tmp/docker-compose-wordpress.yml /root/wordpress-compose/docker-compose.yml #copy docker-compose.yml 
 
-docker-compose build -d                                 #build the services for first time 
+cat docker-compose.yml          #take a quick look at the file
+
+docker-compose up -d                                 #build the services for first time 
 
 docker-compose ps           # list all containers running under this docker-compose
 docker-compose top          # list all processes running inside the containers
@@ -206,13 +210,59 @@ docker-compose top          # list all processes running inside the containers
 * now lets perform some operations on these containers
 ```
 docker-compose logs                 # show the logs of all containers
+
 docker-compose stop         # stop all containers
-docker-compose kill         # kill if stop is not working
+docker-compose ps           # check status of containers
+
 docker-compose start        # start all containers
+docker-compose ps           # check status of containers
+
+docker-compose kill         # kill if stop is not working
+docker-compose ps           # check status of containers
+
 ```
 
-#### Task14: launch a local docker repository to store images locally
-#### Task15: tag and push images to local repository
+#### Task14: setup private docker registry
+* instead of pulling images from dockerhub, we can setup our own private docker registry
+```
+mkdir /root/docker-registry     # create a separate directory for docker-registry
+cd /root/docker-registry 
+cp /tmp/docker-compose-registry.yml ./docker-compose.yml
+cat docker-compose.yml          # take a quick look at the docker-compose.yml file
+
+docker-compose up -d            # bring up the registry container
+docker-compose ps               # check the status 
+docker-compose logs             # check logs
+
+netstat -nap |grep 5000         # check port 5000 is listening 
+curl -X GET http://<ip-of-your-vm>:5000/v2/_catalog     # list the images in the repo. Now its empty
+
+```
+* If you want access the catalog from browser 
+    + click __Dashboard for UI__ , give port 5000, let the page open 
+    + add `/v2/_catalog` to the end of the url to see the list of images on the private registry
+
+#### Task15: tag and push images to private docker registry
+* now that the registry is up, lets push some images to registry
+* pull some images from dockerhub , tag them with new version, push them to private registry
+```
+docker pull busybox     # busybox is a popular image with lot of linux tools
+docker image ls -a          # list all images on the host
+
+docker image tag busybox:latest localhost:5000/busybox:ncdv1    #tag busybox:latest to push to local 
+docker image ls -a          # list all images on the host
+
+docker push localhost:5000/busybox:ncdv1     #image pushed to private registry
+
+
+docker rmi busybox:latest   # remove busybox:latest from current host
+docker rmi busybox:ncdv1   # remove busybox:ncdv1 from current host
+#we have crated this image to push to private registry. Now we will delete from host and then pull from private registy 
+
+docker image ls -a          # list all images on the host
+curl -X GET http://<ip-of-your-vm>:5000/v2/_catalog
+
+```
 
 ---
 ---
