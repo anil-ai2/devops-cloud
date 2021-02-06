@@ -114,10 +114,9 @@ docker run -it ncd-ubuntu-image /bin/bash            # launch a new container fr
 * same thing can be done for any container
 
 #### Task9: delete containers
-```
 * remove all containers that have "exited" or "created" - 
 * "created" is a state of the container when a wrong command is executed inside
-
+```
 docker ps -a            # check status of all containers
 docker rm <container-id or container-name>
 docker rm $(docker ps -a -f status=exited -f status=created -q)     # remove all containers in exited or created state
