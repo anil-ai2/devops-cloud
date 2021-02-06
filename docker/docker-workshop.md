@@ -97,18 +97,18 @@ docker ps -a                    # check status of all containers
 * sometimes we want to save an existing container as image. To take the image to another system
 * _this is not recommended practice. images should not be created from containers. Instead use `Dockerfile` to create images
 ```
-docker pull ubuntu              # pull ubuntu image. Yes, ubuntu also can be run inside a container
-docker run -it ubuntu /bin/bash    # login to ubuntu image
+docker pull ubuntu                                   # pull ubuntu image. Yes, ubuntu also can be run inside a container
+docker run -it ubuntu /bin/bash                      # login to ubuntu image
     apt-get update -y && apt-get install htop -y     # inside the container. install htop
-    htop                           # run htop command inside the container . press q to exit out of htop
+    htop                                             # run htop command inside the container . press q to exit out of htop
     exit
-docker ps -a                            # check all the containers on the host
+docker ps -a                                         # check all the containers on the host
 
 docker commit  <container-id-of-ubuntu>   ncd-ubuntu-image    #this container will be in Exited state
-docker image ls -a                     # check the images. newly created image should be available now
+docker image ls -a                                   # check the images. newly created image should be available now
 
-docker run -it ncd-ubuntu-image /bin/bash    # launch a new container from image 
-    htop                                                # this command is availble without any installation
+docker run -it ncd-ubuntu-image /bin/bash            # launch a new container from image 
+    htop                                             # this command is availble without any installation
     exit
 ```
 * same thing can be done for any container
