@@ -2,13 +2,15 @@
 ---
 #### Task1: IAM User and Policies Hands on
            ``Create IAM user and open two tabs(one for root and the other for IAM user)   IAM user with full admin access
-           create IAM user and log in using iam user
+            create IAM user and log in using iam user
             give Admin access and click on security credentials
             create access key and download the access key
             run $aws configure #from cmd prompt 
+            ##Download and install aws cli on your machine using below link
+              https://awscli.amazonaws.com/AWSCLIV2.msi
             enter access key id
-           enter secret access key
-           region- eu-west-1
+            enter secret access key
+            region- eu-west-1
 
              Create new group using IAM user
              Group Name: developers
