@@ -24,7 +24,16 @@
             Jump onto Policies from root user
             open Adminstrator Access(Click on Policy Summary & JSON code)
             do the same for IAM readonly access``
-#### Task2: 
+#### Task2:IAM role creation 
+            Go to IAM roles
+            Create role
+            Select ec2(under common use cases)
+            next
+            Administrator Access 
+            Next 
+            Next  
+            give role name : ec2role
+            Create role
 #### Task3:
 #### Task4:
 #### Task5:
