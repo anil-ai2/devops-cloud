@@ -25,6 +25,7 @@
             open Adminstrator Access(Click on Policy Summary & JSON code)
             do the same for IAM readonly access``
 #### Task2:IAM role creation 
+            Login using IAM user 
             Go to IAM roles
             Create role
             Select ec2(under common use cases)
