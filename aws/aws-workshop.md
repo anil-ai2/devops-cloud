@@ -35,7 +35,22 @@
             Next  
             give role name : ec2role
             Create role
-#### Task3:
+#### Task3: Ec2 Launch
+            Click on services -> Select ec2 service
+            Instances (running)  -> Launch Instance
+            Search for Ubuntu -> select 18.04 version(AMI ID: ami-02fe94dee086c0c37)
+            Ensure t2.micro is selected -> Next
+            Next -> Next Add storage(give volume size as 8GB)
+            Configure Security Group -> 
+                  Type: SSH
+                  Protocol: Tcp
+                  Port Range: 22
+                  Source : custom [0.0.0.0/0]
+                        
+            Click on Review and Launch
+            Launch -> Create new Key pair
+            give a name to Key Pair and Download it
+            Launch Instance
 #### Task4:
 #### Task5:
 #### Task6:
