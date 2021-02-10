@@ -2,6 +2,14 @@
 ---
 #### Task1: IAM User and Policies Hands on
            ``Create IAM user and open two tabs(one for root and the other for IAM user)   IAM user with full admin access
+           create IAM user and log in using iam user
+            give Admin access and click on security credentials
+            create access key and download the access key
+            run $aws configure #from cmd prompt 
+            enter access key id
+           enter secret access key
+           region- eu-west-1
+
              Create new group using IAM user
              Group Name: developers
              Go to Groups from root user and remove IAM user from group
