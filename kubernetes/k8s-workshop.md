@@ -18,6 +18,12 @@ kubectl port-forward -n kubernetes-dashboard service/kubernetes-dashboard 10443:
 * change the URL to http://URL/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#!/login
 * Paste the `token` copied in earlier step
 
+#### Task1 : wait for the cluster nodes to be ready 
+```
+kubectl get nodes       # wait till the nodes are ready
+```
+
+
 #### Task1: Launch a pod using image , check it and delete the pods 
 ```
 kubectl run ncdnginx --image=nginx         # Start a nginx pod
