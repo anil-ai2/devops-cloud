@@ -2,41 +2,41 @@
 ---
 #### Task1: Launch a pod using image , check it and delete the pods 
 ```
-kubectl run nginx --image=nginx         # Start a nginx pod
+kubectl run ncdnginx --image=nginx         # Start a nginx pod
 kubectl get pods
 
-kubectl run nginx1 --image=nginx --port=80    #Start nginx1 pod,  and let the container expose port 80
+kubectl run ncdnginx1 --image=nginx --port=80    #Start nginx1 pod,  and let the container expose port 80
 kubectl get pods 
 
-kubectl delete pod nginx
+kubectl delete pod ncdnginx
 kubectl get pods 
 
-kubectl delete pod nginx1
+kubectl delete pod ncdnginx1
 kubectl get pods 
 ```
 #### Task2: Create a deployment named ncd-tomcat1 , scaleit up, scaleit down 
 ```
-kubectl create deployment ncd-tomcat1 --image=tomcat
+kubectl create deployment ncd-dep-tomcat1 --image=tomcat
 kubectl get pods            # pods related to the deployment will start
 kubectl get deployments     # ncd-tomcat1 deployment will be visible 
 
-kubectl scale deployment ncd-tomcat1 --replicas=10  # scale the replicaset side to 10. Run the next command immediately
+kubectl scale deployment ncd-dep-tomcat1 --replicas=10  # scale the replicaset side to 10. Run the next command immediately
 watch -n .5 kubectl get pods                        # you should see new pods being created
 
-kubectl scale deployment ncd-tomcat1 --replicas=5   # scaledown the no.of replicas to 5. run watch command immediately
+kubectl scale deployment ncd-dep-tomcat1 --replicas=5   # scaledown the no.of replicas to 5. run watch command immediately
 watch -n .5 kubectl get pods                        # you should see new pods being Terminated
 ``` 
 #### Task3:expose this deploymet as a service (type NodePort)
 ```
-kubectl expose deployment ncd-tomcat2 --port=8080 --target-port=8080 --type=NodePort --external-ip=<ip-of-vm>
+kubectl expose deployment ncd-dep-tomcat1 --port=31000 --target-port=8080 --type=NodePort --external-ip=<ip-of-vm>
 kubectl get svc   #list the services
 ```
 #### Task4: expose the same deployment as another service also
 ```
-kubectl expose deployment ncd-tomcat1 --name=ncd-tomcat2 --port=8080 --target-port=8080 --type=NodePort --external-ip=<ip-of-vm>
+kubectl expose deployment ncd-dep-tomcat1 --name=ncd-svc-tomcat2 --port=32000 --target-port=8080 --type=NodePort --external-ip=<ip-of-vm>
 kubectl get svc 
-kubectl describe svc ncd-tomcat1      # clusterIP type of service
-kubectl describe svc ncd-tomcat2      # NodePort type of service
+kubectl describe svc ncd-dep-tomcat1      # clusterIP type of service
+kubectl describe svc ncd-svc-tomcat2      # NodePort type of service
 ```
 #### Task5: access the NodePort port from UI. You should reach tomcat server. Its ok even if its an error page
 #### Task6: Lets deploy another deployment using a yaml file. 
