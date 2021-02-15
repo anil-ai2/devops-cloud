@@ -21,6 +21,7 @@ kubectl port-forward -n kubernetes-dashboard service/kubernetes-dashboard 10443:
 #### Task1 : wait for the cluster nodes to be ready 
 ```
 kubectl get nodes       # wait till the nodes are ready
+kubectl cluster-info
 ```
 
 
