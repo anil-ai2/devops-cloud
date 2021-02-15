@@ -1,5 +1,23 @@
 ### :camel: command based tasks
 ---
+#### Task0: Deploy k8s dashboard to view the cluster status 
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.5/aio/deploy/recommended.yaml
+cat /tmp/eks-admin-service-account.yaml     # see the yml file to create ServiceAccount
+kubectl apply -f /tmp/eks-admin-service-account.yaml
+
+#retrive the authentication token to login to the dashboard
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | awk '{print $1}')
+
+#copy the token
+
+#forward port 10443 on host to 443 of kubernetes-dashboard
+kubectl port-forward -n kubernetes-dashboard service/kubernetes-dashboard 10443:443 --address 0.0.0.0 &>/dev/null & 
+```
+* now access the UI using `Dashboard UI` and give port 10443. 
+* change the URL to http://URL/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#!/login
+* Paste the `token` copied in earlier step
+
 #### Task1: Launch a pod using image , check it and delete the pods 
 ```
 kubectl run ncdnginx --image=nginx         # Start a nginx pod
