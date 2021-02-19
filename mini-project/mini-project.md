@@ -22,3 +22,15 @@
 * create EKS cluster
 * create workders
 * setup awscli, kubectl , aws-iam-authenticator
+
+
+
+
+
+
+
+
+### aws account cleanup using cloud-nuke command 
+* Install `aws cli`
+* install `cloud-nuke`
+* run `cloud-nuke aws`
