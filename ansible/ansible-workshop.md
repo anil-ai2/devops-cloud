@@ -29,9 +29,10 @@ exit    # exit out of ncodeitubnt1
 ```
 
 #### Task2: install Ansible ncodeitubnt1 and this will be controller
-* make sure you are on the `jumpserver` 
+* click on __Terminal__ and opes a session on  `jumpserver` . Then ssh to Ansible controller `ncodeitubnt1`
 ```
 ip a    # check the ip and make sure its jump server
+ssh  ncodeitadm@ncodeitubnt1        # ssh from jump server to ncodeitunbt1
 ansible --version        # check if ansible already exists
 sudo apt autoremove ansible  #remove default ansible
 
