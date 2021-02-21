@@ -33,7 +33,7 @@
 cd $HOME
 git clone https://github.com/ncodeit-io/devops-cloud        # clone the whole repo
 cd devops-cloud/mini-project
-sudo ./install_java.sh          # install java required by jenkins
+sudo ./install_java8.sh          # install java required by jenkins
 sudo ./install_jenkins.sh       # install jenkins
 ```
     + open url `http://<public-ip-of-jenkins-server-ec2-instance>:8080`
@@ -74,4 +74,10 @@ sudo ./install-docker-ce.sh
 
 ### aws account cleanup using cloud-nuke command 
 * install `cloud-nuke`
+```
+cd $HOME
+git clone https://github.com/ncodeit-io/devops-cloud        # clone the whole repo
+cd devops-cloud/mini-project
+./install_cloud_nuke.sh
+```
 * run `cloud-nuke aws`
