@@ -3,9 +3,10 @@
 ### Architecture 
 ![Architecture of Project k8s&aws](https://i.gyazo.com/6e66f96059ab7628491ae496bc595bf6.png)
 
-* *this is only a partial architecture diagram
+* this is only a partial architecture diagram
+---
 
-### 
+### Summary steps
 * Git and github for source code 
 * Jenkins to run jobs that will build docker images and helm charts
 * Nexus OSS to store the artifacts and helm charts (This will be replaced with S3 helm storage)
@@ -15,8 +16,8 @@
 * traefik or nginx ingress controller to redirect the traffic to internal k8s services
 * aws ALB (Application Load Balancer) to receive the external traffic and redirect to ingress controller
 
-
-### 
+---
+### Detailed steps 
 * Login to root account of aws and launch an EC2 instance (t2.nano) - Download keypair to connect to ec2 instance). store this file with name `keypair-admin-instance`
     + wait till the instance is launched and give it a name  `admin-instance`
     + launch mobaxterm on your laptop and connect to `admin-instance` using the 
