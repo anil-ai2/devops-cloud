@@ -15,5 +15,6 @@ echo "JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"" >> /etc/environment
 
 echo "Restart source file"
 source /etc/environment
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 echo "check JAVA_HOME path"
 echo $JAVA_HOME
