@@ -81,3 +81,7 @@ cd devops-cloud/mini-project
 ./install_cloud_nuke.sh
 ```
 * run `cloud-nuke aws`
+```
+cloud-nuke aws --dry-run        # check the list of resources that will be removed , WITHOUT ACTUALLY DELETING
+cloud_nuke aws      # delete all the  resources
+```
