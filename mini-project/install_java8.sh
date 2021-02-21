@@ -11,7 +11,7 @@ java -version
 
 echo "export java varaibales"
 
-echo "JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/bin/java"" >> /etc/environment
+echo "JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"" >> /etc/environment
 
 echo "Restart source file"
 source /etc/environment
