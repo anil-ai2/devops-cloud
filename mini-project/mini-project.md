@@ -28,46 +28,103 @@
     + give the name `jenkins-server` to this ec2 instance
     + use the same keypair that was used to create first ec2 instance.  By using the same keypair we will be able to login to both instances with the same key. This will keep things simple 
     + login to `jenkins-server` ec2 instance using `keypair-admin-stance`
-* clone the repo from github and run `install_java8.sh` 
+* clone the repo from github and install java,jenkins,maven,helm,docker using the scripts
 ```
 cd $HOME
 git clone https://github.com/ncodeit-io/devops-cloud        # clone the whole repo
 cd devops-cloud/mini-project
 sudo ./install_java8.sh          # install java required by jenkins
 sudo ./install_jenkins.sh       # install jenkins
+sudo ./install-docker-ce.sh
+sudo ./install_kubectl.sh       # install kubectl
+sudo usermod -aG docker,root jenkins    #and add jenkins user to docker group - 
+sudo systemctl restart docker       #restart docker
+sudo systemctl restart jenkins      # restart jenkins
 ```
     + open url `http://<public-ip-of-jenkins-server-ec2-instance>:8080`
     + finish the jenkins installation with `recommnded plugins`
     + login to `jenkins-server` ec2 instance terminal, and check maven
-```
-mvn -version
-```
-    + install helm3 on this same instance
-```
-cd $HOME/devops-cloud/mini-project
-sudo ./install_helm3.sh
-```
-    + Install docker so that jenkins can build docker images
-```
-cd $HOME/devops-cloud/mini-project
-sudo ./install-docker-ce.sh
-```
-    + restart jenkins using `sudo systemctl restart jenkins`
     + login to jenkins UI and install all the plugins as per the jenkins workshop plugins list
     + create a quick freestyle job (without nexus) and see that thre are no issues
 
-### Build and destroy EKS cluster
+* check versions of all the installed softwares
+```
+sudo docker info
+```
+* setup JAVA_HOME environment variable
+	Dashboard -> Manage Jenkins -> configure system -> Global Properties -> Environment Varibales -> Add 
+    ```
+    JAVA_HOME
+    /usr/lib/jvm/java-8-openjdk-amd64
+    ```
+    
+### Build EKS cluster
+* setup awscli, kubectl , eksctl, helm  on `admin-instance`
+```
+cd $HOME
+git clone https://github.com/ncodeit-io/devops-cloud        # clone the whole repo
+cd devops-cloud/mini-project
+sudo ./install_java8.sh          # install java required by jenkins
+sudo ./install-docker-ce.sh
+sudo ./install_kubectl.sh       # install kubectl
+sudo ./install_eksctl.sh
+sudo ./install_helm3.sh
+```
 * Follow the document at https://ncodeit2.atlassian.net/wiki/spaces/DEVOPSAWS/pages/20512778/Create+EKS+cluster to create EKS cluster and do the basic testing of the EKS cluster
-* setup awscli, kubectl , aws-iam-authenticator on `admin-instance`
 
+### configure Jenkins pipeline to build docker image and push to dockerhub 
+* Install the following plugins on Jenkins 
+```
+docker commons
+docker pipeline
+docker
+docker-build-step
+Cloudbees docker build and publish 
+CloudBees Docker Custom Build Environment
+kubernetes
+kubernetes CLI
+kubernetes continuous deploy 
+Jackson 2 API - downgrade to 2.11.3
+Kubernetes Credentials Provider
+```
+* setup the pipeline 
+    + create a free dockerhub account 
+    + login to your github.com account
+    + go to repo `https://github.com/ncodeit-io/ncd-cicd-pipeline-to-k8s.git` and fork the repo into your own repo 
+    + edit `Jenkinsfile` on github itself and change `DOCKER_IMAGE_NAME = "ncodeitdocker/train-schedule"` to `DOCKER_IMAGE_NAME = "<your-dockerhub-id>/train-schedule"`
+    + commit the file with commennt "dockerhub account details updated"
+* create a `credential` on jenkins to store dockerhub login details (ID must match be same as in this doc)
+    + Dashboard -> Manage Jenkins -> Manage Credentials -> Jenkins -> Global Credenials -> Add credentials
+```
+Username: Provide your DockerHub username
+Password: Provide your DuckerHub password
+ID: docker_hub_login
+Description: Docker Hub Login
+```
 
-### configure ingress controller (nginx or traefik)
+* create a `credential` on jenkins to store `KUBECONFIG` file (ID must match be same as in this doc)
+```
+Click Add Credentials in the menu on the left of the page.
 
-### configure Jenkins pipeline to build docker image and helm chart
+Add credentials with the following information:
+
+Kind: Kubernetes configuration (kubeconfig)
+ID: kubeconfig
+Description: Kubeconfig
+Kubeconfig: Enter directly
+Content: Paste the contents of ~/.kube/config
+Click OK.
+```
+* run the pipeline to build and upload the image to dockerhub 
 
 
 
 ### Use helm command to deploy the helm chart to EKS cluster
+* Add bitnami helm repo to helm and download a helm chart in .tgz format
+```
+```
+* deploy a nginx webserver from this helm repo to the EKS cluster (We are not deploying the image we have built here)
+
 
 ###
 
