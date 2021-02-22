@@ -154,8 +154,11 @@ helm uninstall mywebserver
 ```
 aws eks --region us-east-2 update-kubeconfig --name ncdk8scluster   # update the EKS cluster details in local `eksctl`
 eksctl get clusters --region <region-name>
-eksctl delete cluster --name <name-of-cluster> --region <region-of-cluster>
+kubectl get svc -A
+kubectl delete svc <service-name>       # first delete all services that have EXTERNAL_IP assocaited 
+eksctl delete cluster --name <name-of-cluster> --region <region-of-cluster> # finally delete the cluster
 ```
+* eksctl delete command deletes the EKS cluster cleanly and all its dependant components. It ensures that nothing is left out accidentally
 
 ### aws account cleanup using cloud-nuke command 
 * install `cloud-nuke`
@@ -170,3 +173,10 @@ cd devops-cloud/mini-project
 cloud-nuke aws --dry-run        # check the list of resources that will be removed , WITHOUT ACTUALLY DELETING
 cloud_nuke aws      # delete all the  resources
 ```
+
+### login to AWS console and make sure nothing is left out 
+* login to EC2 dashboard and make sure nothing is avaialble in any regions 
+* login to VPC dahsboard and make sure nothing is left out (Especially NAT Gateways, Elastic IPs)
+
+
+## Thats all "ALL THE BEST" 
