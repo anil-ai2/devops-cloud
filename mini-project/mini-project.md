@@ -121,12 +121,35 @@ Click OK.
 
 ### Use helm command to deploy the helm chart to EKS cluster
 * Add bitnami helm repo to helm and download a helm chart in .tgz format
-```
-```
 * deploy a nginx webserver from this helm repo to the EKS cluster (We are not deploying the image we have built here)
+```
+helm repo add bitnami https://charts.bitnami.com/bitnami    # add bitnami helm repo to local helm installation
+helm search repo bitnami/nginx      # search for nginx
+helm install mywebserver bitnami/nginx      # install nginx webserver to EKS cluster
+
+kubectl get svc,po,deploy -A       # get the status of services,pods,deployments on all namespaces
+kubectl describe deployment mywebserver     # describe the newly deployed deployment 
+kubectl get pods -l app.kubernetes.io/name=nginx    # check if all the pods for this deployment have started
+kubectl get service mywebserver-nginx -o wide       # get the details of the LOADBALANCER ( EXTERNAL_IP) for this 
+
+```
+* access the nginx webserver with DNS url from `kubectl get svc -A` 
+
+* list all the installations of helm and uninstall the deployed one 
+```
+helm list
+helm uninstall mywebserver
+```
 
 
-###
+
+### Delete the EKS cluster 
+* login to `admin-instance`
+```
+aws eks --region us-east-2 update-kubeconfig --name ncdk8scluster   # update the EKS cluster details in local `eksctl`
+eksctl get clusters --region <region-name>
+eksctl delete --name <name-of-cluster> --regions <region-of-cluster>
+```
 
 
 ### aws account cleanup using cloud-nuke command 
