@@ -115,9 +115,15 @@ Kubeconfig: Enter directly
 Content: Paste the contents of ~/.kube/config
 Click OK.
 ```
-* run the pipeline to build and upload the image to dockerhub 
+* go to `http://jenkins0101.ncodeit.com/` and loign with your microsoft credentials that were used earlier
+* create the pipeline as per `build-and-upload-docker-image-to-dockerhub`
+* run the pipeline `build-and-upload-docker-image-to-dockerhub` to build and upload the image to dockerhub 
 
 
+### build 2nd pipeline
+* build another pipeline as per `build-and-upload-docker-image-to-dockerhub-microservices` on `jenkins0101.ncodeit.com` 
+* run the pipeline and check if it is successful
+* with this we have build 2 pipelines that can build docker images and upload them to dockerhub 
 
 ### Use helm command to deploy the helm chart to EKS cluster
 * Add bitnami helm repo to helm and download a helm chart in .tgz format
@@ -148,9 +154,8 @@ helm uninstall mywebserver
 ```
 aws eks --region us-east-2 update-kubeconfig --name ncdk8scluster   # update the EKS cluster details in local `eksctl`
 eksctl get clusters --region <region-name>
-eksctl delete --name <name-of-cluster> --regions <region-of-cluster>
+eksctl delete cluster --name <name-of-cluster> --region <region-of-cluster>
 ```
-
 
 ### aws account cleanup using cloud-nuke command 
 * install `cloud-nuke`
