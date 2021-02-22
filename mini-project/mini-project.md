@@ -57,8 +57,9 @@ sudo docker info
     JAVA_HOME
     /usr/lib/jvm/java-8-openjdk-amd64
     ```
-    
+---    
 ### 	:weight_lifting: Build EKS cluster 
+
 * setup awscli, kubectl , eksctl, helm  on `admin-instance`
 ```
 cd $HOME
@@ -71,7 +72,7 @@ sudo ./install_eksctl.sh
 sudo ./install_helm3.sh
 ```
 * Follow the document at https://ncodeit2.atlassian.net/wiki/spaces/DEVOPSAWS/pages/20512778/Create+EKS+cluster to create EKS cluster and do the basic testing of the EKS cluster
-
+---
 ### 	:weight_lifting: configure Jenkins pipeline to build docker image and push to dockerhub 
 * Install the following plugins on Jenkins 
 ```
@@ -119,12 +120,12 @@ Click OK.
 * create the pipeline as per `build-and-upload-docker-image-to-dockerhub`
 * run the pipeline `build-and-upload-docker-image-to-dockerhub` to build and upload the image to dockerhub 
 
-
+---
 ### 	:weight_lifting: build 2nd pipeline & Upload the docker image to dockerhub
 * build another pipeline as per `build-and-upload-docker-image-to-dockerhub-microservices` on `jenkins0101.ncodeit.com` 
 * run the pipeline and check if it is successful
 * with this we have build 2 pipelines that can build docker images and upload them to dockerhub 
-
+---
 ### 	:weight_lifting: Use helm command to deploy the helm chart to EKS cluster
 * Add bitnami helm repo to helm and download a helm chart in .tgz format
 * deploy a nginx webserver from this helm repo to the EKS cluster (We are not deploying the image we have built here)
@@ -146,7 +147,7 @@ kubectl get service mywebserver-nginx -o wide       # get the details of the LOA
 helm list
 helm uninstall mywebserver
 ```
-
+---
 
 
 ### 	:weight_lifting: Delete the EKS cluster 
@@ -159,7 +160,7 @@ kubectl delete svc <service-name>       # first delete all services that have EX
 eksctl delete cluster --name <name-of-cluster> --region <region-of-cluster> # finally delete the cluster
 ```
 * eksctl delete command deletes the EKS cluster cleanly and all its dependant components. It ensures that nothing is left out accidentally
-
+---
 ### 	:weight_lifting: aws account cleanup using cloud-nuke command 
 * install `cloud-nuke`
 ```
@@ -173,7 +174,7 @@ cd devops-cloud/mini-project
 cloud-nuke aws --dry-run        # check the list of resources that will be removed , WITHOUT ACTUALLY DELETING
 cloud_nuke aws      # delete all the  resources
 ```
-
+---
 ### 	:weight_lifting: login to AWS console and make sure nothing is left out 
 * login to EC2 dashboard and make sure nothing is avaialble in any regions 
 * login to VPC dahsboard and make sure nothing is left out (Especially NAT Gateways, Elastic IPs)
