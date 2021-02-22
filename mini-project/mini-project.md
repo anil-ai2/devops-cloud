@@ -17,7 +17,7 @@
 * aws ALB (Application Load Balancer) to receive the external traffic and redirect to ingress controller
 
 ---
-### Detailed steps 
+### 	:weight_lifting: Detailed steps  	:weight_lifting:
 * Login to root account of aws and launch an EC2 instance (t2.nano) - Download keypair to connect to ec2 instance). store this file with name `keypair-admin-instance`
     + wait till the instance is launched and give it a name  `admin-instance`
     + launch mobaxterm on your laptop and connect to `admin-instance` using the 
@@ -58,7 +58,7 @@ sudo docker info
     /usr/lib/jvm/java-8-openjdk-amd64
     ```
     
-### Build EKS cluster
+### 	:weight_lifting: Build EKS cluster 
 * setup awscli, kubectl , eksctl, helm  on `admin-instance`
 ```
 cd $HOME
@@ -72,7 +72,7 @@ sudo ./install_helm3.sh
 ```
 * Follow the document at https://ncodeit2.atlassian.net/wiki/spaces/DEVOPSAWS/pages/20512778/Create+EKS+cluster to create EKS cluster and do the basic testing of the EKS cluster
 
-### configure Jenkins pipeline to build docker image and push to dockerhub 
+### 	:weight_lifting: configure Jenkins pipeline to build docker image and push to dockerhub 
 * Install the following plugins on Jenkins 
 ```
 docker commons
@@ -120,12 +120,12 @@ Click OK.
 * run the pipeline `build-and-upload-docker-image-to-dockerhub` to build and upload the image to dockerhub 
 
 
-### build 2nd pipeline
+### 	:weight_lifting: build 2nd pipeline & Upload the docker image to dockerhub
 * build another pipeline as per `build-and-upload-docker-image-to-dockerhub-microservices` on `jenkins0101.ncodeit.com` 
 * run the pipeline and check if it is successful
 * with this we have build 2 pipelines that can build docker images and upload them to dockerhub 
 
-### Use helm command to deploy the helm chart to EKS cluster
+### 	:weight_lifting: Use helm command to deploy the helm chart to EKS cluster
 * Add bitnami helm repo to helm and download a helm chart in .tgz format
 * deploy a nginx webserver from this helm repo to the EKS cluster (We are not deploying the image we have built here)
 ```
@@ -149,7 +149,7 @@ helm uninstall mywebserver
 
 
 
-### Delete the EKS cluster 
+### 	:weight_lifting: Delete the EKS cluster 
 * login to `admin-instance`
 ```
 aws eks --region us-east-2 update-kubeconfig --name ncdk8scluster   # update the EKS cluster details in local `eksctl`
@@ -160,7 +160,7 @@ eksctl delete cluster --name <name-of-cluster> --region <region-of-cluster> # fi
 ```
 * eksctl delete command deletes the EKS cluster cleanly and all its dependant components. It ensures that nothing is left out accidentally
 
-### aws account cleanup using cloud-nuke command 
+### 	:weight_lifting: aws account cleanup using cloud-nuke command 
 * install `cloud-nuke`
 ```
 cd $HOME
@@ -174,9 +174,9 @@ cloud-nuke aws --dry-run        # check the list of resources that will be remov
 cloud_nuke aws      # delete all the  resources
 ```
 
-### login to AWS console and make sure nothing is left out 
+### 	:weight_lifting: login to AWS console and make sure nothing is left out 
 * login to EC2 dashboard and make sure nothing is avaialble in any regions 
 * login to VPC dahsboard and make sure nothing is left out (Especially NAT Gateways, Elastic IPs)
 
 
-## Thats all "ALL THE BEST" 
+## Thats all "ALL THE BEST"  :v: :wave:
