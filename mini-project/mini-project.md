@@ -100,6 +100,14 @@ Password: Provide your DuckerHub password
 ID: docker_hub_login
 Description: Docker Hub Login
 ```
+* bring the `kubeconfig` file details from eks cluster to the `admin-instance`
+    + login to `admin-instance`
+    + switch to root `sudo su - `
+    + run below command to update the local eksctl with the kubeconfig file of your cluster
+    ```
+    aws eks update-kubeconfig --name dev --region us-east-1     # change 'name' and 'region' as per your cluster
+    ```
+* run `cat $HOME/.kube/config` and make sure the cluster info is displaed. You will need this info in next step
 
 * create a `credential` on jenkins to store `KUBECONFIG` file (ID must match be same as in this doc)
 ```
