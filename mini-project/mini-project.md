@@ -65,8 +65,6 @@ sudo docker info
 cd $HOME
 git clone https://github.com/ncodeit-io/devops-cloud        # clone the whole repo
 cd devops-cloud/mini-project
-sudo ./install_java8.sh          # install java required by jenkins
-sudo ./install-docker-ce.sh
 sudo ./install_kubectl.sh       # install kubectl
 sudo ./install_eksctl.sh
 sudo ./install_helm3.sh
