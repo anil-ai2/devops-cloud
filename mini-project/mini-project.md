@@ -151,8 +151,9 @@ helm uninstall mywebserver
 ### 	:weight_lifting: Delete the EKS cluster 
 * login to `admin-instance`
 ```
-aws eks --region us-east-2 update-kubeconfig --name ncdk8scluster   # update the EKS cluster details in local `eksctl`
-eksctl get clusters --region <region-name>
+# update the EKS cluster details in local `eksctl`
+aws eks --region us-east-2 update-kubeconfig --name ncdk8scluster   # use the correct clustername. 
+eksctl get clusters --region <region-name>      # give the region-name where the cluster is running
 kubectl get svc -A
 kubectl delete svc <service-name>       # first delete all services that have EXTERNAL_IP assocaited 
 eksctl delete cluster --name <name-of-cluster> --region <region-of-cluster> # finally delete the cluster
