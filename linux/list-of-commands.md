@@ -5,6 +5,22 @@
 * date
 * pipe
 
+### files & directories , df -h , du -sk * 
+* pwd
+* cd , cd..
+* ls -ltrh 
+* cat , touch
+* mkdir , mkdir -p 
+* tree
+* cp -r , mv , rm 
+* cat , touch , head , tail 
+* df -h 
+* du -sk * 
+
+### archive & compress
+* tar, untar
+* zip , unzip 
+
 ### processes
 * ps -ef
 * top,htop
@@ -17,20 +33,6 @@
 * route
 * netstat -nap
 * nslookup google.com
-
-### files & directories , df -h , du -sk * 
-* pwd
-* cd , cd..
-* ls -ltrh 
-* cat , touch
-* mkdir , mkdir -p 
-* tree
-* cp -r , mv , rm 
-* cat , touch , head , tail 
-
-### archive & compress
-* tar, untar
-* zip , unzip 
 
 ### user,groups,permissions
 * id
