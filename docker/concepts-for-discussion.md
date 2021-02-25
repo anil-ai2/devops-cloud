@@ -4,4 +4,10 @@
 
 ### docker commands 
     + docker run 
-    + docker 
+    + docker run -p 
+    + docker run -v
+    + docker run --name 
+
+### Dockerfile
+
+### dockerhub
