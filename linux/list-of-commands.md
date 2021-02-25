@@ -1,6 +1,7 @@
 ### General Info about system 
 * id
 * uname
+* hostname
 * groups
 * date
 * pipe
