@@ -36,3 +36,10 @@
 ### Ansible
 * Concepts
 * Workshop
+
+### Apache httpd & nginx httpd servers / tomcat java application server
+* Installation of apache/nginx/tomcat
+* start/stop/restart of apache/nginx/tomcat
+* deploy/undeploy application to apache/nginx/tomcat
+* custom port configuration 
+* logs for troubleshooting
