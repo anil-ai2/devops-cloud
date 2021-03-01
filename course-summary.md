@@ -23,6 +23,9 @@
 
 ### Jenkins
 * Concepts
+    + Agile SDLC process
+    + Continuous Integration Vs Continuous Delivery Vs Continuous Deployment
+    + 
 * Workshop
 
 ### Nexus OSS 
