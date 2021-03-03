@@ -6,8 +6,17 @@
 * Pipeline JOb 
 * Scripted Pipeline
 * Declarative pipeline
+* Parameterized Builds
 
 ### Jenkins Plugins
-
-### Jenkins with slack integration
+    + slack Notification Plugin
+    + nexus artifact uploader
+    + nexus platform 
+    + git parameter plugin
+    + pipeline utility steps plugin 
+    + Artifactory
+    + Maven Release Plug-in
+    + Pipeline Maven Integration Plugin
+    + disk-usage plugin 
+    + Dashboard View 
 

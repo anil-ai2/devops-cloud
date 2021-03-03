@@ -85,7 +85,7 @@ $JAVA_HOME/bin/java --version   # check java version
             + for `Goals and Options` give `clean package` 
         + click `Add build step` -> select `Nexus Artifact Uploader` 
             + `Nexus Version` give `NEXUS3`
-            + `Protocol` give `HTTP`
+            + `Protocol` give `HTTPS`
             + `Nexus Url` give `<ip-of-your-server>:8081`
             + `Credentials`  , select the credentials created earlier for nexus user
             + `GroupId` give `com.ncodeit`
@@ -114,12 +114,47 @@ $JAVA_HOME/bin/java --version   # check java version
 * login to nexus repository
     + click `Browse`
     + click `maven-public`
-    + 
+    + check if the newly created artifact is present or not
 
 
 #### Task9: parameterized job configuration
 #### Task10: scripted pipeline configuration
 #### Task11: declarative pipeline configuration
+* Lets first create the nexus credential to push the artifact to nexus
+    + go to `Dashboard` -> `Manage Jenkins` -> `Manage Credentials`
+    + under `Stores scoped to Jenkins` -> click `Jenkins` 
+    + click `Global credentials(unrestricted)`
+    + click `Add Credentials`
+        + Kind  `Username with password`
+        + username `<give-username-of-your-nexus-server>
+        + Password `<give-password-of-your-nexus-server>
+        + ID `ncodeit-user-on-nexus`       **exact name is mandatory. else pipeline will fail**
+        + Description `ncodeit user on nexus`
+        + click `OK`
+
+* Lets create the declarative Job
+    + go to `Jenkins Dashboard` -> `New Item` -> give `02_jb_declarative_pipeline_job` 
+        + select `Pipeline` -> click `OK`
+        + under `General`
+        + under `Pipeline`
+            + for `Definition` select `Pipeline script`
+            + copy the pipeline code from `https://raw.githubusercontent.com/ncodeit-io/p01-cicd-apps/main/Jenkinsfile`
+            + paste it in the box `script` 
+            + in the script, edit the following parameters to reflect your nexus server
+                + `NEXUS_PROTOCOL` = `https`
+                + `NEXUS_URL` = `<ip-of-your-vm>:8081`
+                + `NEXUS_REPOSITORY` = `maven-public"`
+            + click `Apply` -> click `Save`
+        + click `Build Now` 
+        + under `Build History` -> click on latest running build 
+        + clikc `Console Output` 
+        + Jenkins will download all the dependencies to run the job
+        + wait till `Finished: SUCCESS`
+    + login to nexus repository
+        + click `Browse`
+        + click `maven-public`
+        + check if the newly created artifact is present or not
+
 #### Task12: 
 ---
 ---
