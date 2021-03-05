@@ -8,7 +8,7 @@
     + image vs container
     + Dockerfile
     + linking containers
-    
+
 
 ### docker commands 
 
@@ -21,4 +21,4 @@
 
 ### docker private registry
     + tagging & how to tag images
-    + 
+    + push tagged images from host to private registry
