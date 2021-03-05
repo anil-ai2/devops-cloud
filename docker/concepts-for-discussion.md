@@ -1,13 +1,24 @@
 ### Containers Vs VMs
 
-### docker registry 
+### container implementations 
+	+ rkt 
+	+ crio
+
+### concepts 
+    + image vs container
+    + Dockerfile
+    + linking containers
+    
 
 ### docker commands 
+
     + docker run 
     + docker run -p 
     + docker run -v
     + docker run --name 
 
-### Dockerfile
+### docker registry (dockerhub)
 
-### dockerhub
+### docker private registry
+    + tagging & how to tag images
+    + 
