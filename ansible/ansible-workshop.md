@@ -12,6 +12,8 @@
     + `1st internal server` - `ncodeitubnt1` can be used as `Ansible Controller`
     + remaining `5 internal servers` can be used as `inventory`
 
+### __Note for katacoda session : If the session closes at any points, you can relaunch the session and finish Task1,Task2,Task3,Task4 then jump to any other task afterwords. First 4 tasks are for settingup the ansible environment
+
 #### Task1: setup/check environment of of 7 ubuntu servers
 * Wait until the environment is launched. __It will take about 5 minutes to launch the environment__
 * copy the IP/hostname of all the servers once the katacoda scenario has started. You will need them later
@@ -131,6 +133,15 @@ ansible -i ./ansible-inventory.ini group2servers -a "free -m"            # run a
 # create a new directory with 755 permisssions using file module on all "group1servers"
 ansible -i ./ansible-inventory.ini group1servers -m file -a "path=/home/ncodeitadm/abc state=directory mode=0755"
 
+# ssh to "ncodeitubnt2" server and check if the directory is actually created
+ssh ncodeitadm@ncodeitubnt2
+cd /home/ncodeitadm 
+ls -ltr             # you should see abc directory. You can check other servers also 
+exit                # get back to "ncodeitubnt1" , our ansible-controller server again
+# 
+
+cd $HOME/ansible-controller 
+
 # copy a file from controller to a group of nodes in inventory 
 ansible -i ./ansible-inventory.ini group2servers -m copy -a "src=/etc/hosts dest=/tmp/etc-hosts-from-controller"
 ```
@@ -138,19 +149,71 @@ ansible -i ./ansible-inventory.ini group2servers -m copy -a "src=/etc/hosts dest
 
 #### Task6: run a playbook to install httpd on hosts in [master] group
 * Lets get to the real ansible now. Lets start using ansible playbooks 
-```
+* start with a simple one. Install apache2 server on all the inventory
+* you should see the below nice image after the installation of apache2 is completed 
+* __OK__ in `green`  - __changed__ in `yellow` - __failed__ in `red` 
+
+![Apache installation completed on all the 6 vms](https://i.gyazo.com/b74890f4d5dd27ba8beafda575fdbc43.png)
 
 ```
+cd $HOME/ansible-controller
+curl -OL https://raw.githubusercontent.com/ncodeit-io/devops-cloud-public-repo/main/ansible-playbooks/apache.yml    #download the playbook 
 
+cat apache.yml      # observe the hosts,tasks and modules options 
+ansible-playbook apache.yml -i ./ansible-inventory.ini --ask-become-pass        # run the playbook. Provide password if asked
+
+# ssh to one of the vms in inventory and check if apache2 is installed 
+
+```
 #### Task7: run a playbook to install nginx on all hosts in [group1servers]
-#### Task8: run a playbook to install nginx on all hosts in [group2servers]
-#### Task9: download jenkins role from ansible-galaxy and install on [group1servers]and [group2servers]
-#### Task10: login to awx and explore the interface
+* use nginx.yml playbook to install nginx server only on few of the inventory hosts
+```
+cd $HOME/ansible-controller
+curl -OL https://raw.githubusercontent.com/ncodeit-io/devops-cloud-public-repo/main/ansible-playbooks/nginx.yml    #download the playbook
+
+cat nginx.yml       # observe that "hosts" is defined as all. But still we will try to limit the hosts to only some
+
+ansible-playbook nginx.yml -i ./ansible-inventory.ini --ask-become-pass -l group1servers    # use "-l" option to run on subset of hosts
+
+```
+
+#### Task8: go to ansible galaxy site and search for some roles created by others
+* Lets use some ansible playbooks created by others. ie. playbooks given to us as roles 
+* we will download the role and then create a small playbook to run the role
+* go to website https://galaxy.ansible.com  ; click "cloud" and search for "geerlingguy". He is one of the famous people in ansible 
+* check the various roles he created
+* search for roles by other members related to "jenkins" , "docker" , "mysql"
+#### Task9: download java role from ansible-galaxy
+```
+# check ansible-galaxy version 
+ansible-galaxy --version
+
+# search the role in galaxy.ansible.com from commandline 
+ansible-galaxy search "java for linux" --author geerlingguy     
+
+# download the role from galaxy to $HOME/.ansible/roles/geerlingguy.java on ansible-controller
+sudo ansible-galaxy install geerlingguy.java
+
+cd $HOME/.ansible/roles/geerlingguy.java ; ls -ltr  # check the general directories in any role, defaults, vars etc.
+```
+### Task10: Install the java role on [group2servers]
+* roles can not be executed directly. You need to add them to a playbook always
+* lets create a simple playbook
+* copy/paste the 6 lines of code on prompt. It will create java.yml playbook. This playbook will call geerlingguy.java role that we have just downloaded 
+```
+cd $HOME/ansible-controller
+cat <<HERE > java.yml
+---
+- hosts: all
+  become: yes
+  roles:
+  - geerlingguy.java
+HERE
+```
+* Lets run the `java.yml` playbook now , which calls `geerlingguy.java` role 
+```
+cd $HOME/ansible-controller
+ansible-playbook java.yml -i ./ansible-inventory.ini --ask-become-pass -l group2servers
+```
 ---
 ---
-### :rocket: scenario based tasks 
-#### scenario1: 
-#### scenario2: 
-#### scenario3: 
-#### scenario4: 
-#### scenario5: 
