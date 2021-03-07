@@ -1,6 +1,7 @@
 ### :camel: command based tasks
 ---
 ### Environment
+![Environment Architecutre for this lab](https://i.gyazo.com/a6a4982baf04bd6ff25a966fbc65e556.png)
 * [click this link and open the image to understand the environment first](https://docs.google.com/presentation/d/1Lu_wB5WgMuNjfz6xb57iTuvgrrF4GHRwrKuKTMHOo_M/edit?usp=sharing)
 
     + A ubuntu server will be launched and it will setup another 6 ubuntu servers
@@ -12,6 +13,7 @@
     + remaining `5 internal servers` can be used as `inventory`
 
 #### Task1: setup/check environment of of 7 ubuntu servers
+* Wait until the environment is launched. __It will take about 5 minutes to launch the environment__
 * copy the IP/hostname of all the servers once the katacoda scenario has started. You will need them later
 * check the connectivity from `jumpserver` to all `internal servers`
 ```
@@ -25,7 +27,7 @@ ping ncodeitubnt5   # check connectivity to ncodeitubnt5
 ping ncodeitubnt6   # check connectivity to ncodeitubnt6
 
 ssh ncodeitadm@ncodeitubnt1     # ssh to ncodeitubnt1. password 'ncodeit123'
-exit    # exit out of ncodeitubnt1 
+exit    # exit out of ncodeitubnt1 . 
 ```
 
 #### Task2: install Ansible ncodeitubnt1 and this will be controller
@@ -66,19 +68,19 @@ nano ansible-inventory.ini
 [master]
 ncodeitubnt1	ansible_host=<ip-of-ncodeitubnt1>
 
-[group1-servers]
+[group1servers]
 ncodeitubnt2	ansible_host=<ip-of-ncodeitubnt2>
 ncodeitubnt3	ansible_host=<ip-of-ncodeitubnt3>
 ncodeitubnt4	ansible_host=<ip-of-ncodeitubnt4>
 
-[group2-servers]
+[group2servers]
 ncodeitubnt5	ansible_host=<ip-of-ncodeitubnt5>
 ncodeitubnt6	ansible_host=<ip-of-ncodeitubnt6>
 
 [all:children]
 master
-group1-servers
-group2-servers
+group1servers
+group2servers
  
 #replace <ip-of-xxx> with actual ip available in /tmp/hosts.txt
 
