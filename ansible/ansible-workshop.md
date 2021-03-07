@@ -35,8 +35,8 @@ exit    # exit out of ncodeitubnt1 .
 ```
 ip a    # check the ip and make sure its jump server
 ssh  ncodeitadm@ncodeitubnt1        # ssh from jump server to ncodeitunbt1
-ansible --version        # check if ansible already exists
-sudo apt autoremove ansible  #remove default ansible
+ansible --version        # check if ansible already exists. 
+sudo apt autoremove ansible  #remove default ansible, if it exists
 
 # clone git repo that has ansible installation script 
 git clone https://github.com/ncodeit-io/devops-cloud-public-repo.git    
@@ -63,28 +63,7 @@ ssh ncodeitadm@ncodeitubnt1     # login to controller node
 
 mkdir $HOME/ansible-controller ; cd $HOME/ansible-controller
 
-nano ansible-inventory.ini
-# copy paste below content in this file
-[master]
-ncodeitubnt1	ansible_host=<ip-of-ncodeitubnt1>
-
-[group1servers]
-ncodeitubnt2	ansible_host=<ip-of-ncodeitubnt2>
-ncodeitubnt3	ansible_host=<ip-of-ncodeitubnt3>
-ncodeitubnt4	ansible_host=<ip-of-ncodeitubnt4>
-
-[group2servers]
-ncodeitubnt5	ansible_host=<ip-of-ncodeitubnt5>
-ncodeitubnt6	ansible_host=<ip-of-ncodeitubnt6>
-
-[all:children]
-master
-group1servers
-group2servers
- 
-#replace <ip-of-xxx> with actual ip available in /tmp/hosts.txt
-
-#press ctrl+o , Enter , ctrl+x to save and exit the file
+cp /tmp/ansible-inventory.ini $HOME/ansible-controller  # copy a pre-created inventory file
 
 cat ansible-inventory.ini   # make sure all the servers are listed properly
 ```
