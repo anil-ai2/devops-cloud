@@ -39,7 +39,7 @@ ansible --version        # check if ansible already exists.
 sudo apt autoremove ansible  #remove default ansible, if it exists
 
 # clone git repo that has ansible installation script 
-git clone https://github.com/ncodeit-io/devops-cloud-public-repo.git    
+cd $HOME && git clone https://github.com/ncodeit-io/devops-cloud-public-repo.git    
 
 cd devops-cloud-public-repo
 chmod 755 install-ansible.sh
@@ -56,17 +56,18 @@ ip a    # make sure is jumpserver
 cat /tmp/hosts.txt      # this file has IPs and hostnames.
 # you need to create the inventory file using these IPs and hostnames
 ```
-* from `jumpserver`, ssh to `ansible controller (ncodeitubnt1)` and create inventory file `ansible-inventory.ini`
+* from `jumpserver`, ssh to `ansible controller (ncodeitubnt1)` , create a separate directory for all the files related to ansible and copy existing inventory file `ansible-inventory.ini`
 ```
 # open a new terminal on jumpserver 
 ssh ncodeitadm@ncodeitubnt1     # login to controller node
 
-mkdir $HOME/ansible-controller ; cd $HOME/ansible-controller
+mkdir $HOME/ansible-controller ; cd $HOME/ansible-controller    #create a directory for all the ansible related files
 
-cp /tmp/ansible-inventory.ini $HOME/ansible-controller  # copy a pre-created inventory file
+cp /tmp/ansible-inventory.ini $HOME/ansible-controller/ansible-inventory.ini  # copy a pre-created inventory file
 
-cat ansible-inventory.ini   # make sure all the servers are listed properly
+cat $HOME/ansible-controller/ansible-inventory.ini   # make sure all the servers are listed properly
 ```
+* __NOTE: we are not using the /etc/ansible/hosts file. Instead we are using a custom inventory file ansible-inventory.ini__
 
 #### Task4: setup password-less ssh login from controller to all nodes in inventory
 * login from `jumpserver` to `ansible controller(ncodeitubnt1)`
@@ -111,23 +112,27 @@ exit                            # exit out of ssh sesion. You are back in ncodei
 * all adhoc commands are run using `ansible` command
 * syntax is `ansible -i <inventory-file> [singleserver or group-of-servers as definedin inventory] -m [module] -a "[module options]"`
 ```
-ip a    # make sure you are on controller. 
+# Be on "jumpserver". And from "jumpserver" ssh to ansible-controller "ncodeitubnt1"
+ssh ncodeitadm@ncodeitubnt1
+
+ip a    # make sure you are on controller "ncodeitubnt1"
 
 cd $HOME/ansible-controller
-ansible -i ./ansible-inventory.ini group1-servers -a "ip a" -u ncodeitadm  #run the "ip a" command on group1-servers1
 
-ansible -i ./ansible-inventory.ini all -m ping
+ansible -i ./ansible-inventory.ini all -m ping      # ping all the servers
 
-ansible -i ./ansible-inventory.ini all -m command -a uptime
-ansible -i ./ansible-inventory.ini all -m shell -a uptime
-ansible -i ./ansible-inventory.ini all -a uptime
-ansible -i ./ansible-inventory.ini group2-server -a "free -m"
+ansible -i ./ansible-inventory.ini group1servers -a "ip a" -u ncodeitadm  #run the "ip a" command on group1servers1
 
-# create a new directory with 755 permisssion using file module
-ansible -i ./ansible-inventory.ini group1-server -m file -a "path=/home/ncodeitadm/abc state=directory mode=0755"
+ansible -i ./ansible-inventory.ini all -m command -a uptime             # use module "command" to run "uptime" command
+ansible -i ./ansible-inventory.ini all -m shell -a uptime               # use model "shell" to run "uptime" command
+ansible -i ./ansible-inventory.ini all -a uptime                        # run an adhoc command using -a option
+ansible -i ./ansible-inventory.ini group2servers -a "free -m"            # run an adhoc command only on "group2servers"
+
+# create a new directory with 755 permisssions using file module on all "group1servers"
+ansible -i ./ansible-inventory.ini group1servers -m file -a "path=/home/ncodeitadm/abc state=directory mode=0755"
 
 # copy a file from controller to a group of nodes in inventory 
-ansible -i ./ansible-inventory.ini group1-server -m copy -a "src=/etc/hosts dest=/tmp/etc-hosts-from-controller"
+ansible -i ./ansible-inventory.ini group2servers -m copy -a "src=/etc/hosts dest=/tmp/etc-hosts-from-controller"
 ```
 
 
@@ -137,9 +142,9 @@ ansible -i ./ansible-inventory.ini group1-server -m copy -a "src=/etc/hosts dest
 
 ```
 
-#### Task7: run a playbook to install nginx on all hosts in [group1-servers]
-#### Task8: run a playbook to install nginx on all hosts in [group2-servers]
-#### Task9: download jenkins role from ansible-galaxy and install on [group1-servers]and [group2-servers]
+#### Task7: run a playbook to install nginx on all hosts in [group1servers]
+#### Task8: run a playbook to install nginx on all hosts in [group2servers]
+#### Task9: download jenkins role from ansible-galaxy and install on [group1servers]and [group2servers]
 #### Task10: login to awx and explore the interface
 ---
 ---
