@@ -2,5 +2,7 @@ FROM centos
 RUN yum install httpd -y
 COPY index.html /var/www/html/
 
-CMD [“/usr/sbin/httpd”,” -D”,” FOREGROUND”]
 EXPOSE 80
+# Start the service
+CMD ["-D", "FOREGROUND"]
+ENTRYPOINT ["/usr/sbin/httpd"]
