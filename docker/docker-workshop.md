@@ -129,8 +129,8 @@ docker rm $(docker ps -a -f status=exited -f status=created -q)     # remove all
 
 #### Task11: tag images & push images to dockerhub
 * tagging in simple words is to give a version to an existing image
-* syntax `docker tag <existing-image-with-tag>  <dockerhub-user>/<remote-image-name-with-tag>
-* __repository name on dockerhub.com should be same as the image name thats being tagged
+* syntax `docker tag <existing-image-with-tag>  <dockerhub-user>/<remote-image-name-with-tag>`
+* __repository name on dockerhub.com should be same as the image name thats being tagged__
 * once the tagging is done, login to docker registry with `docker login`
 * then push the image to docker registry using `docker push`
 * lets tag our image and push to the newly created dockerhub account 
