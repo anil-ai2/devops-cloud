@@ -1,0 +1,17 @@
+wordpress:
+    image: wordpress
+    links:
+     - mariadb:mysql
+    environment:
+     - WORDPRESS_DB_PASSWORD=password
+    ports:
+     - "80:80"
+    volumes:
+     - /root/wordpress-compose/html:/var/www/html
+mariadb:
+    image: mariadb
+    environment:
+     - MYSQL_ROOT_PASSWORD=password
+     - MYSQL_DATABASE=wordpress
+    volumes:
+     - /root/wordpress-compose/database:/var/lib/mysql
