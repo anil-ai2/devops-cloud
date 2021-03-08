@@ -330,6 +330,8 @@ docker image ls -a      # check if the newly created image exists or not
 docker run -itd --name ncd-myhttpdimage-container -p 5050:80 myhttpdimage:ncdv1     # launch a container with newly created image
 docker ps -a            # check if the launched container is 
 
+curl localhost:5050     # the index.html page we have pushed into image should be visible. 5050 is port we mapped from host to 80 on container
+
 ```
 ---
 ---
