@@ -312,12 +312,18 @@ docker pull localhost:5000/git:ncdv1
 docker image ls -a          # list all images on host. YOu should see the newly pulled image from private registry 
 
 ```
+#### Task16: Build a docker image with Docker
+![Dockerfile used to build "docker imag" which is used to launch "docker conntainer](https://miro.medium.com/max/3600/0*CP98BIIBgMG2K3u5.png)
+* Lets build a docker image based on an existing Dockerfile
+* syntax of building docker images is `docker build -t <tag-name> .`  - observe the `. dot`
+```
+mkdir $HOME/my-custom-httpd-image && cd $HOME/my-custom-httpd-image
+curl -OL https://raw.githubusercontent.com/sclorg/httpd-container/master/2.4/Dockerfile         #download the Dockerfile
 
+docker build -t myhttpdimage .      # build the image with tag myhttpdimage. This image can be pushed to dockerhub.
+
+# if you need to push the image to another regisistry tag it again and push to private registry 
+
+```
 ---
 ---
-### :rocket: scenario based tasks 
-#### scenario1: 
-#### scenario2: 
-#### scenario3: 
-#### scenario4: 
-#### scenario5: 
