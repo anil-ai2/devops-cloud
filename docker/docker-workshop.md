@@ -314,15 +314,20 @@ docker image ls -a          # list all images on host. YOu should see the newly 
 ```
 #### Task16: Build a docker image with Docker
 ![Dockerfile used to build "docker imag" which is used to launch "docker conntainer](https://miro.medium.com/max/3600/0*CP98BIIBgMG2K3u5.png)
-* Lets build a docker image based on an existing Dockerfile
+* Lets build a httpd docker image based on an existing Dockerfile
 * syntax of building docker images is `docker build -t <tag-name> .`  - observe the `. dot`
 ```
 mkdir $HOME/my-custom-httpd-image && cd $HOME/my-custom-httpd-image
-curl -OL https://raw.githubusercontent.com/sclorg/httpd-container/master/2.4/Dockerfile         #download the Dockerfile
+curl -OL https://raw.githubusercontent.com/ncodeit-io/devops-cloud/main/docker/Dockerfile         #download the Dockerfile
+curl -OL https://raw.githubusercontent.com/ncodeit-io/devops-cloud/main/docker/index.html         #copy a simple index.html file
 
-docker build -t myhttpdimage .      # build the image with tag myhttpdimage. This image can be pushed to dockerhub.
+docker build -t myhttpdimage:ncdv1 .      # build the image with tag myhttpdimage. This image can be pushed to dockerhub.
 
-# if you need to push the image to another regisistry tag it again and push to private registry 
+# if you need to push the image to another regisistry tag it again and push to private registry
+
+docker image ls -a      # check if the newly created image exists or not 
+
+docker run -itd --name ncd-myhttpdimage-container -p 5050:80 myhttpdimage:ncdv1
 
 ```
 ---
