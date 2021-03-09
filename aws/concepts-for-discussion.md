@@ -13,13 +13,15 @@
 
 
 ### IAM - Identity and access management 
+
 * Users, Groups , Roles, Policies
-* Accekeys
+* Authentication , Authorization
+* security certificates, Accekeys, tokens
 
 ### Compute 
 * EC2
 * Lambda
-* Lightsaid
+* Lightsail
 
 ### Storage
 * S3
