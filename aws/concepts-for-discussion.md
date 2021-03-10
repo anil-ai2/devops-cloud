@@ -9,7 +9,12 @@
 * security certificates, Accekeys, tokens
 
 ### Compute 
-* EC2
+* EC2 
+    + What is Elastic Compute Cloud 
+    + AMI, types of ec2 instances (t2.micro,t3.micro,Mx,Dx,Gx)
+    + on-demand,spot,reserved instances 
+    + spot fleets
+    + accessing the EC2 instances
 * Lambda
 * Lightsail
 
