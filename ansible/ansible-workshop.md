@@ -120,7 +120,7 @@ ssh ncodeitadm@ncodeitubnt1
 ip a    # make sure you are on controller "ncodeitubnt1"
 
 cd $HOME/ansible-controller
-
+export ANSIBLE_HOST_KEY_CHECKING=False    # to disable hostname verification by ansible
 ansible -i ./ansible-inventory.ini all -m ping      # ping all the servers
 
 ansible -i ./ansible-inventory.ini group1servers -a "ip a" -u ncodeitadm  #run the "ip a" command on group1servers1
