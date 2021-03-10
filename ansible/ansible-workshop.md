@@ -152,9 +152,7 @@ ansible -i ./ansible-inventory.ini group2servers -m copy -a "src=/etc/hosts dest
 * start with a simple one. Install apache2 server on all the inventory
 * you should see the below nice image after the installation of apache2 is completed 
 * __OK__ in `green`  - __changed__ in `yellow` - __failed__ in `red` 
-<span style="color:green">green</span>
-<span style="color:yellow">yellow</span>
-<span style="color:red">red</span>
+
 ![Apache installation completed on all the 6 vms](https://i.gyazo.com/b74890f4d5dd27ba8beafda575fdbc43.png)
 
 ```
