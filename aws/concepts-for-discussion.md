@@ -24,6 +24,7 @@
 
 ### Network 
 * VPC 
+![aws vpc NACL vs security group](https://i.gyazo.com/f2fb3101e02cb7ac589a100a99f1abe7.png)
 * Internet Gateway
 * Subnets ( Public Vs Private Subnets)
 * NACL
@@ -34,6 +35,7 @@
 
 ### Storage
 * S3
+![s3 object lifecycle policy](https://i.gyazo.com/f15bd20b360cdcb9b636bac07df6677e.png)
 * EBS
 * EFS
 
