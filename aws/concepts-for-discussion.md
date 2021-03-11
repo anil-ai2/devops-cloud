@@ -15,6 +15,7 @@
     + on-demand,spot,reserved instances 
     + spot fleets
     + accessing the EC2 instances
+    + ASG (Auto Scaling Group)
 * Lambda
 * Lightsail
 
@@ -27,8 +28,7 @@
 ![aws vpc NACL vs security group](https://i.gyazo.com/f2fb3101e02cb7ac589a100a99f1abe7.png)
 * Internet Gateway
 * Subnets ( Public Vs Private Subnets)
-* NACL
-* Security Groups
+* NACL Vs Security Groups
 * Ingress / Egress
 * ELB (ALB/NLB/CLB)
 
