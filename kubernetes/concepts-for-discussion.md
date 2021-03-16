@@ -10,7 +10,7 @@
 ### API Objects, context, kubectl 
 
 ### Deployments
-* deployments
+* deployments (ReplicaSets, Daemonsets)
 * Services
     + ClusterIP
     + NodePort
@@ -22,7 +22,7 @@
 * Persistance Volume Claim
 * Storage Class
 
-### labels, Annotatons, Taints, Tolerations, 
+### labels, Selectors, Annotatons, Taints, Tolerations
 
 ### NodeAffinity vs Pod Affinity 
 
