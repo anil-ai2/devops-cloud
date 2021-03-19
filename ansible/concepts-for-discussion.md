@@ -12,6 +12,7 @@
     + Inventory 
     + Ansible configuration files and Inventory files
     + structure of inventory file in ini and yaml format
+    + setting up ssh-keys for password-less access from controller to nodes
 
 ### Adhoc commands, Playbooks & Plays 
     + Playbooks, Plays, Tasks, Modules 
