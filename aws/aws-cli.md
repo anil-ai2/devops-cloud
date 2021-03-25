@@ -140,6 +140,21 @@ aws ec2 terminate-instances --instance-ids <instance2-id> <instance3-id>    # le
 aws ec2 describe-instances --output table     # check the status of all the instances
 aws ec2 reboot-instances --instance-ids <instance4-id> <instance5-id>
 ```
+* List all running instances
+```
+cd $HOME/devops-cloud-public-repo/aws/aws-cli
+./ec2-list-all-running-instances.sh
+```
+* List all running instances in table format
+```
+cd $HOME/devops-cloud-public-repo/aws/aws-cli
+./ec2-list-all-running-instances-in-table-format.sh
+```
+* Get public IP of all running instances 
+```
+cd $HOME/devops-cloud-public-repo/aws/aws-cli
+./ec2-get-publicIP-of-all-instances.sh
+```
 * Terminate all the instances 
 ```
 aws ec2 describe-instances --output table     # notice the instance id
