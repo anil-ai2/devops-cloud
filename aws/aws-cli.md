@@ -1,6 +1,9 @@
 # aws cli related tasks 
 ---
 ### :camel: 
+---
+## Note: At any point of time after the lab is done, login to your aws account and delete the AccessKeyID,SecreatKey. Else you have exposed your account to serious security risk. You might loose lakhs of rupees. Careful with your credentials.
+---
 #### Task1: Install aws cli 
 ```
 cd $HOME && git clone https://github.com/ncodeit-io/devops-cloud-public-repo.git
