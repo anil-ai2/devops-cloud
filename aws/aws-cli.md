@@ -160,7 +160,7 @@ cd $HOME/devops-cloud-public-repo/aws/aws-cli
 aws ec2 describe-instances --output table     # notice the instance id
 aws ec2 terminate-instances --instance-ids <instance2-id> <instance3-id>    # lets terminate all instances
 ```
-* * go to `aws management console` and make sure all the instances are in `Terminating` staus. If any instance is missing terminate it from command-line
+* go to `aws management console` and make sure all the instances are in `Terminating` staus. If any instance is missing terminate it from command-line
 #### Task4: s3 related activities
 * general commands related to __s3__
 ```
