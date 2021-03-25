@@ -14,7 +14,7 @@ cd devops-cloud-public-repo/aws/aws-cli
 * login to aws management console 
 * click on your username at right-side top corner -> My security Credentials -> Access Keys -> Create New Access Key -> Download Keyfile with name "ncd-awscli-lab-access-key" . This file will be on your laptop
 * open the ncd-awscli-lab-access-key file and see the content. You will see `AWSAccessKeyId` and `AWSSecretKey` in that file . We will need these two values in next step
-#### Task2: configure profiles for awscli & check the configuration files for the root user
+#### Task3: configure profiles for awscli & check the configuration files for the root user
 * configure the awscli for root user
 ```
 aws configure       # privide the AWSAccessKeyID and AWSSecretKey that were generated in earlier step. 
@@ -53,7 +53,7 @@ aws iam list-users --profile default                    # running command with r
 
 ```
 
-#### Task3: use environment variables instead of profiles
+#### Task4: use environment variables instead of profiles
 * download the base files 
 ```
 cd $HOME && git clone https://github.com/ncodeit-io/devops-cloud-public-repo.git
@@ -71,7 +71,7 @@ export AWS_DEFAULT_PROFILE="awsclilab-user-profile"     # setting "awsclilab-use
 aws configure list                                      # details related to "awsclilab-user-profile" profile are shown
 ```
 
-#### Task3: EC2 related commands
+#### Task5: EC2 related commands
 * clone the repo that has all the awscli scripts
 ```
 export AWS_DEFAULT_PROFILE="awsclilab-user-profile"     #setup the profile to "awsclilab-user-profile"
@@ -164,7 +164,7 @@ aws ec2 describe-instances --output table     # notice the instance id
 aws ec2 terminate-instances --instance-ids <instance2-id> <instance3-id>    # lets terminate all instances
 ```
 * go to `aws management console` and make sure all the instances are in `Terminating` staus. If any instance is missing terminate it from command-line
-#### Task4: s3 related activities
+#### Task6: s3 related activities
 * general commands related to __s3__
 ```
 aws s3 ls		# list all S3 buckets
@@ -173,7 +173,7 @@ aws s3 ls		                                            # check the newly created
 aws s3 rb s3://ncd-bucket1-anil999000 --force		# remove bucket
 
 ```
-#### Task5: IAM related activities
+#### Task7: IAM related activities
 * general commands related to __IAM__
 ```
 aws iam list-users   --output table 	            # list all user's info
@@ -184,9 +184,8 @@ aws iam get-user   --output text               # list current user's info in tex
 
 aws iam list-access-keys      # list current user's access keys
 ```
-#### Task6: 
-#### Task7: 
 #### Task8: 
 #### Task9: 
+#### Task10:  
 
 ---
