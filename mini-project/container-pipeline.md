@@ -66,7 +66,19 @@ sudo ./install_helm3.sh         # install helm
 ---
 
 #### :weight_lifting:  setup pipeline to build helm 
-* setup a Freestyle project with below commands. 
+* Before we create our own helm chart lets try an existing helm chart from a public repository 
+```
+helm repo add bitnami https://charts.bitnami.com/bitnami            # add bitnami public repository
+helm search repo bitnami nginx                                  # search "bitnami" repo for a chart "nginx"
+helm install mywebserver bitnami/nginx                          # install helm chart nginx with name "mywebserver"
+kubectl get all -A                                              # you should see the "myserver" deployment 
+helm list                                                       # should show the installed helm chart 
+
+```
+* go ahead and UNINSTALL the chart
+```
+helm uninstall mywebserver                                      # uninstall the nginx application
+```
 * create a helm chart , package it and push the chart to s3-helm-repo
 ```
 helm create train-schedule                                        # create the helm chart directory structure
@@ -105,3 +117,10 @@ helm search repo stable-myapp train-schedule                  # search the repo 
 helm install -n train-schedule010 stable-myapp/train-schedule
 ```
 #### :weight_lifting: check if the newly deployed service is running
+* check the services running on EKS cluster
+```
+kubectl get svc -A              # get services running on all namesspaces
+# you should see train-schedule service also running.
+```
+* get the __EXTERNAL_IP__ of the service. This is the ALB created by the EKS cluster to allow ingress traffik 
+* open the url `http://<EXTERNAL_IP>` in the browser and you should see the application
