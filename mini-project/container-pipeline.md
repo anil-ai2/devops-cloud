@@ -66,7 +66,8 @@ sudo ./install_helm3.sh         # install helm
     + `Kubernetes Continuous Deploy Plugin`
     + `Kubernetes plugin`
 
-* Fork repository https://github.com/ncodeit-io/ncd-cicd-pipeline-to-k8s.git into your account 
+* Login to your github account, then, open the url https://github.com/ncodeit-io/ncd-cicd-pipeline-to-k8s.git
+* click on `Fork` to get a copy of the repository into your account
 * in the repository, open file `Jenkinsfile`  and update `DOCKER_IMAGE_NAME` value with your dockerhub account details 
 * Run the build and confirm that the image is pushed to your dockerhub account
 ---
