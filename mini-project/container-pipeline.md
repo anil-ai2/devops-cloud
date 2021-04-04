@@ -29,11 +29,17 @@ aws configure
 ```
 * run the following commands to install `helm-s3` plugin , initialize the s3 bucket as helm repo and add that repo to local helm
 ```
-helm plugin install https://github.com/hypnoglow/helm-s3.git
-helm s3 init s3://<bucket-name>/stable/myapp/                       #replace <bucket-name> with your bucket name
-aws s3 ls s3://<bucket-name>/stable/myapp/                          #replace <bucket-name> with your bucket name
+helm plugin install https://github.com/hypnoglow/helm-s3.git        #install helm-s3 plugin that will allow helm tool to interact with s3
+#replace <bucket-name> with your bucket name from all further commads
+
+helm s3 init s3://<bucket-name>/stable/myapp/                       # initialize the s3 bucket as helm repository
+# at this step go to your s3 bucket and check if index.html file. This file will list all the charts available in the s3-helm repo
+aws s3 ls s3://<bucket-name>/stable/myapp/                          # list the cotents of s3 bucket using aws cli command
+
 helm repo add stable-myapp s3://<bucket-name>/stable/myapp/         #replace <bucket-name> with your bucket name
-helm repo list
+
+helm repo list                          # list all the repos that are currently added to helm tool in jumpbox.
+# above command should show the newly added helm repository 
 ```
 ---
 ###	:weight_lifting: setup EKS cluster 
@@ -97,15 +103,8 @@ service:
 helm lint                                   # run a linter on helm chart to check for syntax errors
 helm package train-schedule --debug                           # helm chart will be created in the form of tgz file
 
-
-helm repo index myapp/ --url s3://<bucket-name>/stable/myapp/       # convert the s3 bucket into a helm repo by generating index file
-
-# at this step go to your s3 bucket and check if index.html file. This file will list all the charts available in the s3-helm repo
-
-helm repo list                          # list all the repos that are currently added to helm tool in jumpbox.
-# above command should show the newly added helm repository 
-
 helm s3 push train-schedule-0.1.0.tgz stable-myapp            # Push the newly created chart to s3-helm repo 
+helm repo index myapp/ --url s3://<bucket-name>/stable/myapp/       # add the newly pushed chart to the index file
 helm repo list
 helm search repo stable-myapp train-schedule                  # search the repo "stable-myapp" for a chart "train-schedule"
 ```
@@ -124,3 +123,5 @@ kubectl get svc -A              # get services running on all namesspaces
 ```
 * get the __EXTERNAL_IP__ of the service. This is the ALB created by the EKS cluster to allow ingress traffik 
 * open the url `http://<EXTERNAL_IP>` in the browser and you should see the application
+
+
