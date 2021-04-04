@@ -13,7 +13,7 @@
 ### Detailed steps : 
 #### :weight_lifting:  setup dockerhub account and repository 
 * create dockerhub account
-* create repository with the same name as the image name that will be build later. In this lab, we are creating an image with name `ncd-microservice-ui` . So, the repository name will be `ncd-microservice-ui` __NOTE__: repo name should be exactly same as image name
+* create repository with the same name as the image name that will be build later. In this lab, we are creating an image with name `train-schedule` . So, the repository name will be `train-schedule` __NOTE__: repo name should be exactly same as image name
     + If you make mistake while creating repos, then delete the repo and recrete 
 * 
 ---
