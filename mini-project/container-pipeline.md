@@ -73,19 +73,27 @@ sudo ./install_helm3.sh         # install helm
 
 #### :weight_lifting:  setup pipeline to build helm 
 * Before we create our own helm chart lets try an existing helm chart from a public repository 
+* Add bitnami helm repo to helm and download a nginx helm chart in .tgz format and launch a webserver in EKS cluster using this chart
 ```
-helm repo add bitnami https://charts.bitnami.com/bitnami            # add bitnami public repository
-helm search repo bitnami nginx                                  # search "bitnami" repo for a chart "nginx"
-helm install mywebserver bitnami/nginx                          # install helm chart nginx with name "mywebserver"
-kubectl get all -A                                              # you should see the "myserver" deployment 
-helm list                                                       # should show the installed helm chart 
+helm repo add bitnami https://charts.bitnami.com/bitnami    # add bitnami helm repo to local helm installation
+helm search repo bitnami/nginx      # search for nginx
+helm install mywebserver bitnami/nginx      # install nginx webserver to EKS cluster
+
+kubectl get svc,po,deploy -A       # get the status of services,pods,deployments on all namespaces
+kubectl describe deployment mywebserver     # describe the newly deployed deployment 
+kubectl get pods -l app.kubernetes.io/name=nginx    # check if all the pods for this deployment have started
+kubectl get service mywebserver-nginx -o wide       # get the details of the LOADBALANCER ( EXTERNAL_IP) for this 
 
 ```
-* go ahead and UNINSTALL the chart
+* access the nginx webserver with DNS url from `kubectl get svc -A` 
+
+* list all the installations of helm and uninstall the deployed one 
 ```
-helm uninstall mywebserver                                      # uninstall the nginx application
+helm list
+helm uninstall mywebserver
 ```
-* create a helm chart , package it and push the chart to s3-helm-repo
+
+* Now, lets try to create our own helm chart , package it and push the chart to s3-helm-repo
 ```
 helm create train-schedule                                        # create the helm chart directory structure
 cd train-schedule
