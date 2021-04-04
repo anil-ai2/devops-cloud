@@ -102,8 +102,9 @@ nano values.yaml                                                   # open the va
 
 image:
   repository: <your-dockerhubid>/train-schedule
-  tag: latest
   pullPolicy: IfNotPresent
+  tag: latest
+  
 service:
   name: train-schedule
   type: LoadBalancer
