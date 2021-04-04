@@ -90,7 +90,7 @@ kubectl get service mywebserver-nginx -o wide       # get the details of the LOA
 
 * list all the installations of helm and uninstall the deployed one 
 ```
-helm list
+helm list            
 helm uninstall mywebserver
 ```
 
