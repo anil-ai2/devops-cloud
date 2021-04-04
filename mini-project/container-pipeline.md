@@ -93,6 +93,22 @@ kubectl get service mywebserver-nginx -o wide       # get the details of the LOA
 helm list            
 helm uninstall mywebserver
 ```
+* Lets pull a public helm chart , tag it and push it to our private repository 
+```
+mkdir $HOME/my-private-nginx
+cd $HOME/my-private-nginx
+helm repo add bitnami https://charts.bitnami.com/bitnami    # add bitnami helm repo to local helm installation
+helm search repo bitnami/nginx      # search for nginx
+helm pull bitnami/nginx --version 8.8.1               # pull the nginx chart in tgz format from bitnami repository
+# this will download nginx-8.8.1.tgz file to local server 
+ls -ltr                                               # you should see the nginx-8.8.1.tgz file 
+tar zxvf nginx-8.8.1.tgz                              # extract the chart archive file and see the general contents
+helm s3 push nginx-8.8.1.tgz stable-myapp             # push the tgz file to your own s3-helm repo
+helm search stable-myapp/nginx                        # you should see nginx in your own repo now
+
+```
+
+
 
 * Now, lets try to create our own helm chart , package it and push the chart to s3-helm-repo
 ```
