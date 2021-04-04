@@ -30,7 +30,7 @@ aws configure
 * run the following commands to install `helm-s3` plugin , initialize the s3 bucket as helm repo and add that repo to local helm
 ```
 helm plugin install https://github.com/hypnoglow/helm-s3.git        #install helm-s3 plugin that will allow helm tool to interact with s3
-#replace <bucket-name> with your bucket name from all further commads
+#replace <bucket-name> with your bucket name for all further commands
 
 helm s3 init s3://<bucket-name>/stable/myapp/                       # initialize the s3 bucket as helm repository
 # at this step go to your s3 bucket and check if index.html file. This file will list all the charts available in the s3-helm repo
