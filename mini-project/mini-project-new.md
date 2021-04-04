@@ -7,6 +7,7 @@
 * this is only a partial architecture diagram
 ---
 ### Summary steps
+![Infrastructure view of the CICD pipeline](https://i.gyazo.com/1685c88b02a384f65d56990e13ad79f8.jpg)
 * Git and github for source code 
 * Jenkins to run jobs that will build war file - Artifact 
 * Nexus OSS to store the war file 
