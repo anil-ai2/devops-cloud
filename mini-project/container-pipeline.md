@@ -136,8 +136,8 @@ kubectl get svc -A              # get services running on all namesspaces
 
 
 #### :weight_lifting: Cleanup 
-* delete the EKS cluster
-* terminate the jumpbox ec2 instance
-* delete the s3 bucket 
+* delete the EKS cluster  (Use the eksctl command to delete. Do not delete from management console)
+* terminate the jumpbox ec2 instance  (from management onsole)
+* delete the s3 bucket    (from management onsole)
 ----
 # :clap: :thumbsup: Well DONE
