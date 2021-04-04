@@ -114,7 +114,7 @@ helm package train-schedule --debug                           # helm chart will 
 helm s3 push train-schedule-0.1.0.tgz stable-myapp            # Push the newly created chart to s3-helm repo 
 helm repo index myapp/ --url s3://<bucket-name>/stable/myapp/       # add the newly pushed chart to the index file
 helm repo list
-helm search repo stable-myapp train-schedule                  # search the repo "stable-myapp" for a chart "train-schedule"
+helm search repo stable-myapp/train-schedule                  # search the repo "stable-myapp" for a chart "train-schedule"
 ```
 ---
 #### :weight_lifting: deploy helm chart to kubernetes 
