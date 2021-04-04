@@ -140,4 +140,4 @@ kubectl get svc -A              # get services running on all namesspaces
 * terminate the jumpbox ec2 instance
 * delete the s3 bucket 
 ----
-# :claps: Well DONE
+# :clap: :thumbsup: Well DONE
