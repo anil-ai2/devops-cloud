@@ -35,15 +35,6 @@ aws s3 ls s3://<bucket-name>/stable/myapp/                          #replace <bu
 helm repo add stable-myapp s3://<bucket-name>/stable/myapp/         #replace <bucket-name> with your bucket name
 helm repo list
 ```
-* create a helm chart , package it and push the chart to s3-helm-repo
-```
-helm repo index myapp/ --url s3://<bucket-name>/stable/myapp/       #replace <bucket-name> with your bucket name
-helm repo list
-helm s3 push helloworld-chart-0.1.0.tgz stable-myapp                
-helm repo list
-helm search repo stable-myapp
-```
-
 ---
 ###	:weight_lifting: setup EKS cluster 
 
@@ -60,10 +51,6 @@ sudo ./install_helm3.sh         # install helm
 * Follow the document at https://ncodeit2.atlassian.net/wiki/spaces/DEVOPSAWS/pages/20512778/Create+EKS+cluster to create EKS cluster and do the basic testing of the EKS cluster
 ---
 #### :weight_lifting: setup jenkins pipeline to build docker image
----
-#### :weight_lifting:  setup pipeline to build helm
----
-#### :weight_lifting: setup jenkins pipeline to build docker image
 * install following plugins 
     + `CloudBees Docker Build and Publish plugin`
     + `Docker Commons Plugin`
@@ -76,3 +63,18 @@ sudo ./install_helm3.sh         # install helm
 * Fork repository https://github.com/ncodeit-io/ncd-cicd-pipeline-to-k8s.git into your account 
 * in the repository, open file `Jenkinsfile`  and update `DOCKER_IMAGE_NAME` value with your dockerhub account details 
 * Run the build and confirm that the image is pushed to your dockerhub account
+---
+#### :weight_lifting:  setup pipeline to build helm
+* setup a Freestyle project with below commands. 
+* create a helm chart , package it and push the chart to s3-helm-repo
+```
+helm repo index myapp/ --url s3://<bucket-name>/stable/myapp/       #replace <bucket-name> with your bucket name
+helm repo list
+helm s3 push helloworld-chart-0.1.0.tgz stable-myapp                
+helm repo list
+helm search repo stable-myapp
+```
+```
+
+```
+---
