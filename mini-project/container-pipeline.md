@@ -125,3 +125,9 @@ kubectl get svc -A              # get services running on all namesspaces
 * open the url `http://<EXTERNAL_IP>` in the browser and you should see the application
 
 
+#### :weight_lifting: Cleanup 
+* delete the EKS cluster
+* terminate the jumpbox ec2 instance
+* delete the s3 bucket 
+----
+# :claps: Well DONE
