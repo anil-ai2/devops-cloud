@@ -64,17 +64,44 @@ sudo ./install_helm3.sh         # install helm
 * in the repository, open file `Jenkinsfile`  and update `DOCKER_IMAGE_NAME` value with your dockerhub account details 
 * Run the build and confirm that the image is pushed to your dockerhub account
 ---
-#### :weight_lifting:  setup pipeline to build helm
+
+#### :weight_lifting:  setup pipeline to build helm 
 * setup a Freestyle project with below commands. 
 * create a helm chart , package it and push the chart to s3-helm-repo
 ```
-helm repo index myapp/ --url s3://<bucket-name>/stable/myapp/       #replace <bucket-name> with your bucket name
-helm repo list
-helm s3 push helloworld-chart-0.1.0.tgz stable-myapp                
-helm repo list
-helm search repo stable-myapp
-```
-```
+helm create train-schedule                                        # create the helm chart directory structure
+cd train-schedule
+nano values.yaml                                                   # open the values.yaml file and update the values
 
+image:
+  repository: <your-dockerhubid>/train-schedule
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  name: train-schedule
+  type: LoadBalancer
+  port: 80
+
+helm lint                                   # run a linter on helm chart to check for syntax errors
+helm package train-schedule --debug                           # helm chart will be created in the form of tgz file
+
+
+helm repo index myapp/ --url s3://<bucket-name>/stable/myapp/       # convert the s3 bucket into a helm repo by generating index file
+
+# at this step go to your s3 bucket and check if index.html file. This file will list all the charts available in the s3-helm repo
+
+helm repo list                          # list all the repos that are currently added to helm tool in jumpbox.
+# above command should show the newly added helm repository 
+
+helm s3 push train-schedule-0.1.0.tgz stable-myapp            # Push the newly created chart to s3-helm repo 
+helm repo list
+helm search repo stable-myapp train-schedule                  # search the repo "stable-myapp" for a chart "train-schedule"
 ```
 ---
+#### :weight_lifting: deploy helm chart to kubernetes 
+* Install the helm chart available at s3-helm-repo to the EKS cluster
+
+```
+helm install -n train-schedule010 stable-myapp/train-schedule
+```
+#### :weight_lifting: check if the newly deployed service is running
