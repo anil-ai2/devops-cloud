@@ -58,18 +58,4 @@ git push origin --all
 ### :rocket: scenario based tasks 
 #### scenario1: 
 * _out of 5 developers working on a github repository, one has pushed fresh code to repo. You also have created fresh code and want to push to github central repo. How will you make sure your code does not conflict with others code ? _
-#### scenario2: 
-#### scenario3: 
-#### scenario4: 
-#### scenario5: 
 
-* 
-* 
-*  
-* 
-* 
-* 
-* 
-* 
-* 
-* 
