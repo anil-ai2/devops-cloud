@@ -10,9 +10,9 @@
     `ssh -N  {red-server-username}@{red-server-ip}   -L {any-port-on-BLUESERVER}:{GREENSERVER-IP}:{PORT-ON-GREENSERVER}`
     + for eg: for the tunnel as shown in the diagram , run the following command on `BlueServer`
     `ssh -N ncodeitadm@192.168.0.2  -L 8080:192.168.0.3:80`
-    + Above command will as for the password of user `ncodeitadm` on `192.168.0.2` . Enter the password and the cursor will be blinking without any output. Thats the ssh tunnel 
+    + Above command will ask for the password of user `ncodeitadm` on `192.168.0.2` . Enter the password and the cursor will be blinking without any output. Thats the ssh tunnel 
     + keep this session running 
-    + open a browser and access the url `http://loccalhost:{port-on-BLUESERVER-as-given-in-ssh-command}`
+    + open a browser window on `BlueServer` and access the url `http://loccalhost:{port-on-BLUESERVER-as-given-in-ssh-command}`
 
 
 * Multiple SSH tunnels can be opened to different servers from `BlueServer`
