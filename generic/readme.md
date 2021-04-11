@@ -12,7 +12,7 @@
     `ssh -N ncodeitadm@192.168.0.2  -L 8080:192.168.0.3:80`
     + Above command will ask for the password of user `ncodeitadm` on `192.168.0.2` . Enter the password and the cursor will be blinking without any output. Thats the ssh tunnel 
     + keep this session running 
-    + open a browser window on `BlueServer` and access the url `http://loccalhost:{port-on-BLUESERVER-as-given-in-ssh-command}`
+    + open a browser window on `BlueServer` and access the url `http://localhost:{port-on-BLUESERVER-as-given-in-ssh-command}`
 
 
 * Multiple SSH tunnels can be opened to different servers from `BlueServer`
