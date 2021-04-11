@@ -7,7 +7,7 @@
     + we want to access the apache on `GreenServer` from a browser window opened on  `BlueServer`
 
     + on `BlueServer` , open a terminal and start a ssh tunnel 
-    `ssh -N  {red-server-username}@{red-server-ip}   -L {port-on-BLUESERVER}:{GREENSERVER-IP}:{PORT-ON-GREENSERVER}`
+    `ssh -N  {red-server-username}@{red-server-ip}   -L {any-port-on-BLUESERVER}:{GREENSERVER-IP}:{PORT-ON-GREENSERVER}`
     + for eg: for the tunnel as shown in the diagram , run the following command on `BlueServer`
     `ssh -N ncodeitadm@192.168.0.2  -L 8080:192.168.0.3:80`
     + Above command will as for the password of user `ncodeitadm` on `192.168.0.2` . Enter the password and the cursor will be blinking without any output. Thats the ssh tunnel 
