@@ -4,7 +4,7 @@
     + `GreenServer` is an internal server that is only accessible from `RedServer`
     + `BlueServer` can ssh into `RedServer` but directly can not ssh into `GreenServer`
     + Assume an apache server is running on `GreenServer`
-    + we want to access the apache on `GreenServer` to be accessble on `BlueServer` Browser
+    + we want to access the apache on `GreenServer` from a browser window opened on  `BlueServer`
 
     + on `BlueServer` , open a terminal and start a ssh tunnel 
     `ssh -N  {red-server-username}@{red-server-ip}   -L {port-on-BLUESERVER}:{GREENSERVER-IP}:{PORT-ON-GREENSERVER}`
