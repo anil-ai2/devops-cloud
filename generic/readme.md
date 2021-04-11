@@ -3,7 +3,7 @@
 * __PURPOSE:__ consider a scenario 
     + `GreenServer` is an internal server that is only accessible from `RedServer`
     + `BlueServer` can ssh into `RedServer` but directly can not ssh into `GreenServer`
-    + Assume a apache server is running on `GreenServer`
+    + Assume an apache server is running on `GreenServer`
     + we want to access the apache on `GreenServer` to be accessble on `BlueServer` Browser
 
     + on `BlueServer` , open a terminal and start a ssh tunnel 
