@@ -159,7 +159,7 @@ rm  /root/.docker/config.json       # remove the stored credentials
 #### Task12: Link multiple containers with one another
 
 * for eg: if a database is required for application, a database container is launched first and then other container is launched. 
-![wordpress and mysql architecture](https://www.blaize.net/wp-content/uploads/2017/02/wordpress-docker.png)
+![wordpress and mysql architecture](https://miro.medium.com/max/841/1*OkW9CNab5pe8q5HZLz6cDw.png)
 * Lets deploy mysql/mariadb first and link this container to frontend wordpress container 
 
 ```
