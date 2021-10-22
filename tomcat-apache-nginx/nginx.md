@@ -45,8 +45,8 @@ curl -I http://<ip-of-your-servr>/new-file.html  #port 80 is default. That means
 ```
 cd /etc/nginx/sites-enabled      #nginx default page location
 sudo nano default    #nginx configuration file 
-#look for port "listen 80 default_server;" and change to "listen 8080 default_server;"
-ctrl+o , Enter , ctrl+x # save and exit nano
+#look for port "listen 80 default_server;"  & "listen [::]:80 default_server; "and change to "listen 8080 default_server;" ,"listen [::]:8090 default_server;"
+ctrl+o , Enter , ctrl+x # save and exit nano 
 cat default         # make sure 80 is changed to 8080
 
 sudo systemctl stop nginx       #stop the nginx  server
