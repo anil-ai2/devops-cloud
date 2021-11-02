@@ -46,3 +46,7 @@
 * deploy/undeploy application to apache/nginx/tomcat
 * custom port configuration 
 * logs for troubleshooting
+
+### terraform
+* concepts
+* workshop
