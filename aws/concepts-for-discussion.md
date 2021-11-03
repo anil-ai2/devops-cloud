@@ -16,8 +16,10 @@
     + spot fleets
     + accessing the EC2 instances
     + ASG (Auto Scaling Group)
-* Lambda
 * Lightsail
+* Lambda
+* ECS ( Elastic Container Service)
+* EKS ( Elastic Kubernetes service)
 
 ### Automation
 * CloudFormation
