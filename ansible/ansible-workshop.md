@@ -12,7 +12,7 @@
     + `1st internal server` - `ncodeitubnt1` can be used as `Ansible Controller`
     + remaining `5 internal servers` can be used as `inventory`
 
-### __Note for katacoda session : If the session closes at any points, you can relaunch the session and finish Task1,Task2,Task3,Task4 then jump to any other task afterwords. First 4 tasks are for settingup the ansible environment
+### __Note for katacoda session : If the session closes at any point, you can relaunch the session and finish Task1,Task2,Task3,Task4 then jump to any other task afterwards. First 4 tasks are for settingup the ansible environment
 
 #### Task1: setup/check environment of of 7 ubuntu servers
 * Wait until the environment is launched. __It will take about 5 minutes to launch the environment__
