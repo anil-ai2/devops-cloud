@@ -32,8 +32,8 @@ ssh ncodeitadm@ncodeitubnt1     # ssh to ncodeitubnt1. password 'ncodeit123'
 exit    # exit out of ncodeitubnt1 . 
 ```
 
-#### Task2: install Ansible ncodeitubnt1 and this will be controller
-* click on __Terminal__ and opes a session on  `jumpserver` . Then ssh to Ansible controller `ncodeitubnt1`
+#### Task2: install Ansible on "ncodeitubnt1" and this will be "controller"
+* click on __Terminal__ and open a session on  `jumpserver` . Then ssh to Ansible controller machine `ncodeitubnt1`
 ```
 ip a    # check the ip and make sure its jump server
 ssh  ncodeitadm@ncodeitubnt1        # ssh from jump server to ncodeitunbt1
@@ -112,7 +112,7 @@ exit                            # exit out of ssh sesion. You are back in ncodei
 
 #### Task5: run some adhoc commands
 * all adhoc commands are run using `ansible` command
-* syntax is `ansible -i <inventory-file> [singleserver or group-of-servers as definedin inventory] -m [module] -a "[module options]"`
+* syntax is `ansible -i <inventory-file> [singleserver or group-of-servers as defined in inventory] -m [module] -a "[module options]"`
 ```
 # Be on "jumpserver". And from "jumpserver" ssh to ansible-controller "ncodeitubnt1"
 ssh ncodeitadm@ncodeitubnt1
@@ -147,10 +147,10 @@ ansible -i ./ansible-inventory.ini group2servers -m copy -a "src=/etc/hosts dest
 ```
 
 
-#### Task6: run a playbook to install httpd on hosts in [master] group
+#### Task6: run a playbook to install httpd on nodes in [master] group
 * Lets get to the real ansible now. Lets start using ansible playbooks 
 * start with a simple one. Install apache2 server on all the inventory
-* you should see the below nice image after the installation of apache2 is completed 
+* you should see the below nice output from ansible (as shownn in image) after the installation of apache2 is completed 
 * __OK__ in `green`  - __changed__ in `yellow` - __failed__ in `red` 
 
 ![Apache installation completed on all the 6 vms](https://i.gyazo.com/b74890f4d5dd27ba8beafda575fdbc43.png)
@@ -165,7 +165,7 @@ ansible-playbook apache.yml -i ./ansible-inventory.ini --ask-become-pass        
 # ssh to one of the vms in inventory and check if apache2 is installed 
 
 ```
-#### Task7: run a playbook to install nginx on all hosts in [group1servers]
+#### Task7: run a playbook to install nginx on all nodes in group [group1servers]
 * use nginx.yml playbook to install nginx server only on few of the inventory hosts
 ```
 cd $HOME/ansible-controller
@@ -196,7 +196,7 @@ sudo ansible-galaxy install geerlingguy.java
 
 cd $HOME/.ansible/roles/geerlingguy.java ; ls -ltr  # check the general directories in any role, defaults, vars etc.
 ```
-### Task10: Install the java role on [group2servers]
+### Task10: Install the java role on nodes in the group [group2servers]
 * roles can not be executed directly. You need to add them to a playbook always
 * lets create a simple playbook
 * copy/paste the 6 lines of code on prompt. It will create java.yml playbook. This playbook will call geerlingguy.java role that we have just downloaded 
