@@ -58,8 +58,8 @@ aws iam list-users --profile default                    # running command with r
 ```
 cd $HOME && git clone https://github.com/ncodeit-io/devops-cloud-public-repo.git
 cd devops-cloud-public-repo/aws/aws-cli 
-cp user1.profile $HOME/awsclilab-user.profile
-source $HOME/awsclilab-user.profile
+cp user1-profile $HOME/awsclilab-user-profile
+source $HOME/awsclilab-user-profile
 
 ```
 * set `AWS_DEFAULT_PROFILE` parameter to switch between the profiles
