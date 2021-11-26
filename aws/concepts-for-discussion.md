@@ -48,5 +48,5 @@
 
 -- 
 - ECS - Elastic Container Service 
-![ECS basic flow](https://gyazo.com/784c127024c910d03b05f46ac1bbdc2b)
-![ECS Components and how they related to each other ](https://gyazo.com/19452cd437bfbd6ca21ad982ff4ad7bf)
+![ECS basic flow](https://i.gyazo.com/784c127024c910d03b05f46ac1bbdc2b.png)
+![ECS Components and how they related to each other ](https://i.gyazo.com/19452cd437bfbd6ca21ad982ff4ad7bf.png)
