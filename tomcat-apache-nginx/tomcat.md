@@ -76,9 +76,9 @@ sudo systemctl restart tomcat  ; sudo systemctl status tomcat   # restart and ch
 ```
 #tomcat web gui accessible only from localhost. Allow external access
 
-sudo cp /root/context.xml /opt/tomcat/webapps/host-manager/META-INF/context.xml
+sudo cp /root/context.xml /opt/tomcat85/webapps/host-manager/META-INF/context.xml
 
-sudo cp /root/context.xml  /opt/tomcat/webapps/manager/META-INF/context.xml
+sudo cp /root/context.xml  /opt/tomcat85/webapps/manager/META-INF/context.xml
 ```
 #### Task5: check the default page of tomcat from command prompt
 * tomcat default port is 8080
