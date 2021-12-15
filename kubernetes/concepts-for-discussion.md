@@ -25,9 +25,10 @@
     - hostpath (not suitable or multinode cluster)
     - static volumes created on nfs or other storage 
     - dynamic volumes created on nfs or other storage , using storageClass 
+        - provisioner in storageClass
 - Persistance Volume, Persistance Volume Claim
 
-### labels, Annotatons , Selectors,
+### labels, Annotatons , Selectors
 ### Taints, Tolerations
 
 ### configMaps, secrets
