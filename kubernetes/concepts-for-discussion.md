@@ -10,7 +10,7 @@
 ### API Objects, context, kubectl 
 
 ### Deployments
-* deployments (ReplicaSets, Daemonsets)
+* deployments (ReplicaSets, Daemonsets ,statefulsets)
 * Services
     + ClusterIP
     + NodePort
