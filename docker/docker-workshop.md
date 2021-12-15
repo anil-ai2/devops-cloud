@@ -174,7 +174,7 @@ docker ps -a    # check the list of containers
 # launch the frontend wordpress container . Link it to backend mysql using "--link" keyword
 # so frontend container is linked to backend container 
 
-docker run -e WORDPRESS_DB_PASSWORD=ncodeit123 --name wordpress --link wordpressdb:mysql -p 80:80 -v "/root/wordpress/html":/var/www/html -d wordpress
+docker run -e WORDPRESS_DB_PASSWORD=ncodeit123 --name wordpress10 --link wordpressdb:mysql -p 8089:80 -v "/root/wordpress/html":/var/www/html -d wordpress
 
 docker ps -a 
 ```
