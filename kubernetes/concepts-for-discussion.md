@@ -17,12 +17,20 @@
     + LoadBalancer
 * Ingress Vs Ingress Controller
 
-### PV,PVC,Storage Class
-* Persistance Volume
-* Persistance Volume Claim
-* Storage Class
+### volumes
+- ephemeral volumes Vs persistant volumes
+- ephemeral
+    - emptyDir{} 
+- persistant
+    - hostpath (not suitable or multinode cluster)
+    - static volumes created on nfs or other storage 
+    - dynamic volumes created on nfs or other storage , using storageClass 
+- Persistance Volume, Persistance Volume Claim
 
-### labels, Selectors, Annotatons, Taints, Tolerations
+### labels, Annotatons , Selectors,
+### Taints, Tolerations
+
+### configMaps, secrets
 
 ### NodeAffinity vs Pod Affinity 
 
@@ -30,3 +38,9 @@
 
 ### Helm Repository , Charts 
 
+### RBAC
+
+### Monitoring using Prometheus,Grafana 
+
+### Tools 
+- k9s
