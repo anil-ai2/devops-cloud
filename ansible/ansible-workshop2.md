@@ -26,7 +26,7 @@ id  # make sure its ztrixadm
 
 [ ! -d .ssh ] && mkdir ~/.ssh                       # create directory .ssh if it does not exist 
 
-ssh-keyscan 20.20.20.20 >> ~/.ssh/known_hosts       # repeat this process for all the inventory files
+ssh-keyscan 20.20.20.20 >> ~/.ssh/known_hosts       # repeat this process for all the inventory files. Replace the IP with correct one
 ssh-keygen -t rsa 
 ssh-copy-id ztrixadm@20.20.20.20                    # provide the password "ztrix123"
 
