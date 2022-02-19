@@ -60,13 +60,13 @@ $JAVA_HOME/bin/java --version   # check java version
 * after installing `slack notifications` plugin, configure the settings of this plugin so that jenkins can send notifications to slack
 * in our case, we are going to send build notifications to `devops-cloud` channel on our slack 
 * go to Jenkins Dashboard -> Manage Jenkins -> Configure System -> scrolldown to `Slack`
-    + `Workspace` -> `ncodeit`
+    + `Workspace` -> `ztrix`
     + `Credentials`  -> click `Add` -> `Jenkins` -> under `Kind` select  `Secret text`
-        + for `Secret` give as `mVpee4Ly9JRAKwzRj4JSEYiG` 
+        + for `Secret` give as `QvtrkktiuqECXIPCXqhdOZrF` 
         + for `ID`  give `slack-id-for-jenkins-alerts`
         + click `Add`
     + now for `Credentials` select the id `slack-id-for-jenkins-alerts` , its created just now
-    + `Default channel/member id`  give `devops-cloud`
+    + `Default channel/member id`  give `alerts`
     + `Test Connection`     -> Make sure its `Success`
     + `Apply`
 
