@@ -206,7 +206,7 @@ docker-compose up -d                                 #build the services for fir
 docker-compose ps           # list all containers running under this docker-compose
 docker-compose top          # list all processes running inside the containers
 ```
-* access the wordpress site on port 80 and make sure its accessible
+* access the wordpress site on port `8000` and make sure its accessible
 * now lets perform some operations on these containers
 ```
 docker-compose logs                 # show the logs of all containers
