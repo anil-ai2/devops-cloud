@@ -1,17 +1,31 @@
-wordpress:
-    image: wordpress
-    links:
-     - mariadb:mysql
+version: "3.9"
+    
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
     environment:
-     - WORDPRESS_DB_PASSWORD=password
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    volumes:
+      - wordpress_data:/var/www/html
     ports:
-     - "80:80"
-    volumes:
-     - /root/wordpress-compose/html:/var/www/html
-mariadb:
-    image: mariadb
+      - "8000:80"
+    restart: always
     environment:
-     - MYSQL_ROOT_PASSWORD=password
-     - MYSQL_DATABASE=wordpress
-    volumes:
-     - /root/wordpress-compose/database:/var/lib/mysql
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+volumes:
+  db_data: {}
+  wordpress_data: {}
