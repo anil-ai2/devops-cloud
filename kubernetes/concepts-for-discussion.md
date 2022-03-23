@@ -9,9 +9,7 @@
 #### Deployments
 * deployments (ReplicaSets, Daemonsets ,statefulsets)
 * Services
-    + ClusterIP
-    + NodePort
-    + LoadBalancer
+    + ClusterIP,NodePort,LoadBalancer
 * Ingress Vs Ingress Controller
 #### volumes
 - ephemeral volumes Vs persistant volumes
