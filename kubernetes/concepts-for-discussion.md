@@ -6,12 +6,14 @@
 * Containers, Pods, Nodes
 * etcd,kubeapi,scheduler,kubecontroller,kubelet,kubeproxy
 #### API Objects, context, kubectl 
+- API Objects, Manifests, Understanding a Manifest structure
 #### Deployments
 * deployments (ReplicaSets, Daemonsets ,statefulsets)
+#### services
 * Services
     + ClusterIP,NodePort,LoadBalancer
 * Ingress Vs Ingress Controller
-#### volumes
+#### volumes (storage)
 - ephemeral volumes Vs persistant volumes
 - ephemeral
     - emptyDir{} 
